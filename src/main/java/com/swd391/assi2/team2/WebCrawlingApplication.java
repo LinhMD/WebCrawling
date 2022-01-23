@@ -34,5 +34,6 @@ public class WebCrawlingApplication  implements ApplicationRunner {
 //		Document jobDetail = Jsoup.connect("https://123job.vn/viec-lam/tuyen-dung-nhan-vien-sale-khong-yeu-cau-kinh-nghiem-Mv91wVnOqW").get();
 		Spider spider = spiderFactory.getSpider("src/main/resources/spider/spider.config.xml");
 		spider.getSpiderJobs().forEach(System.out::println);
+		spider.run();
 	}
 }

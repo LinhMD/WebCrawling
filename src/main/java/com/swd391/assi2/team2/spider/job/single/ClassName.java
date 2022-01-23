@@ -20,4 +20,8 @@ public class ClassName extends SingleJob{
 				'}';
 	}
 
+	@Override
+	public MethodCall[] getImplementMethods() {
+		return new MethodCall[0];
+	}
 }

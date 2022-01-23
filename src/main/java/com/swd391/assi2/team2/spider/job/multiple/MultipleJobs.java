@@ -29,32 +29,32 @@ public abstract class MultipleJobs implements SpiderJob {
 	}
 
 	@Override
-	public Object collectFromList(List<Element> elements) {
+	public Object collectFromList(ArrayList<Element> elements) {
 		return null;
 	}
 
 	@Override
-	public List<Object> collects(List<Element> elements) {
-		return SpiderJob.super.collects(elements);
-	}
-
-	@Override
-	public List<Element> findAll(List<Element> elements) {
+	public ArrayList<Element> findAll(ArrayList<Element> elements) {
 		return null;
 	}
 
 	@Override
-	public List<Element> filter(List<Element> elements) {
+	public ArrayList<Element> filter(ArrayList<Element> elements) {
 		return null;
 	}
 
 	@Override
-	public List<Element> map(List<Element> elements) {
+	public ArrayList<Element> map(ArrayList<Element> elements) {
 		return null;
 	}
 
 	@Override
-	public List<Element> peek(List<Element> elements) {
+	public ArrayList<Element> peek(ArrayList<Element> elements) {
 		return null;
+	}
+
+	@Override
+	public MethodCall[] getImplementMethods() {
+		return new MethodCall[0];
 	}
 }

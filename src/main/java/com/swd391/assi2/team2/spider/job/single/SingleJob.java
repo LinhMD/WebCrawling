@@ -3,6 +3,7 @@ package com.swd391.assi2.team2.spider.job.single;
 import com.swd391.assi2.team2.spider.job.SpiderJob;
 import org.jsoup.nodes.Element;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //please note that all class extend this must have all the field type String
@@ -14,27 +15,32 @@ public abstract class SingleJob implements SpiderJob {
 	}
 
 	@Override
-	public Object collectFromList(List<Element> elements) {
+	public Object collectFromList(ArrayList<Element> elements) {
 		return null;
 	}
 
 	@Override
-	public List<Element> findAll(List<Element> elements) {
+	public ArrayList<Element> findAll(ArrayList<Element> elements) {
 		return null;
 	}
 
 	@Override
-	public List<Element> filter(List<Element> elements) {
+	public ArrayList<Element> filter(ArrayList<Element> elements) {
 		return null;
 	}
 
 	@Override
-	public List<Element> map(List<Element> elements) {
+	public ArrayList<Element> map(ArrayList<Element> elements) {
 		return null;
 	}
 
 	@Override
-	public List<Element> peek(List<Element> elements) {
+	public ArrayList<Element> peek(ArrayList<Element> elements) {
 		return null;
+	}
+
+	@Override
+	public MethodCall[] getImplementMethods() {
+		return new MethodCall[0];
 	}
 }
