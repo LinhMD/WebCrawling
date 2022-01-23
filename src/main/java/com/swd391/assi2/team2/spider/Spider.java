@@ -3,6 +3,7 @@ package com.swd391.assi2.team2.spider;
 import com.swd391.assi2.team2.spider.job.SpiderJob;
 import org.jsoup.nodes.Element;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +32,20 @@ public class Spider {
 				"spiderJobs=" + spiderJobs +
 				'}';
 	}
-	void run(){
-		Element element = new Element("");
-		for (SpiderJob spiderJob : getSpiderJobs()) {
-			element = (Element) spiderJob.run(element);
+
+	public void run(){
+		for (SpiderJob spiderJob : this.spiderJobs) {
+			try {
+				spiderJob.run(new ArrayList<Element>());
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
 		}
 	}
+
 
 }

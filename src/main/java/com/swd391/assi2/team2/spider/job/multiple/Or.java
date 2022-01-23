@@ -7,4 +7,8 @@ import java.util.List;
 
 public class Or extends MultipleJobs{
 
+	@Override
+	public MethodCall[] getImplementMethods() {
+		return new MethodCall[0];
+	}
 }

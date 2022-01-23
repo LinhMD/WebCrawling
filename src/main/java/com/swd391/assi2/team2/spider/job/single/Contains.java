@@ -16,5 +16,8 @@ public class Contains extends SingleJob {
 	}
 
 
-
+	@Override
+	public MethodCall[] getImplementMethods() {
+		return new MethodCall[0];
+	}
 }
