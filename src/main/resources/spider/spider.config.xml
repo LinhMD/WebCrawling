@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spider>
+    <SpiderJobs>
+        <single.ID>
+            <id>id</id>
+        </single.ID>
+        <single.ID>
+            <id>id2</id>
+        </single.ID>
+        <multiple.And>
+            <single.ID>
+                <id>id3</id>
+            </single.ID>
+            <single.ClassName>
+                <className>Name</className>
+            </single.ClassName>
+        </multiple.And>
+    </SpiderJobs>
+</Spider>

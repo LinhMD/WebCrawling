@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spider>
+    <SpiderJobs>
+        <single.IDJob>
+            <id>id</id>
+        </single.IDJob>
+        <single.IDJob>
+            <id>id2</id>
+        </single.IDJob>
+        <multiple.AndJob>
+            <complex.ComplexJobTest>
+            </complex.ComplexJobTest>
+            <single.IDJob>
+                <id>id3</id>
+            </single.IDJob>
+            <single.ClassNameJob>
+                <className>Name</className>
+            </single.ClassNameJob>
+        </multiple.AndJob>
+    </SpiderJobs>
+</Spider>
