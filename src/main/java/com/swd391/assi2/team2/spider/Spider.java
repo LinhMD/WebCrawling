@@ -34,14 +34,11 @@ public class Spider {
 	}
 
 	public void run(){
+		Object result = new ArrayList<Element>();
 		for (SpiderJob spiderJob : this.spiderJobs) {
 			try {
-				spiderJob.run(new ArrayList<Element>());
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
+				result = spiderJob.run(result);
+			} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
