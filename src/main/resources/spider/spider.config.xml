@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Spider>
     <SpiderJobs>
-        <single.ID>
-            <id>id</id>
+        <in.Visit>
+            <url>https://123job.vn/jobs</url>
+            <method>start</method>
+        </in.Visit>
+        <process.ClassName>
+            <className>item-job-cpn__info</className>
             <method>findAll</method>
-        </single.ID>
-<!--        <single.ID>-->
-<!--            <id>id2</id>-->
-<!--            <method>findALl</method>-->
-<!--        </single.ID>-->
-<!--        <multiple.And>-->
-<!--            <single.ID>-->
-<!--                <id>id3</id>-->
-<!--                <method>filter</method>-->
-<!--            </single.ID>-->
-<!--            <single.ClassName>-->
-<!--                <className>Name</className>-->
-<!--                <method>filter</method>-->
-<!--            </single.ClassName>-->
-<!--        </multiple.And>-->
+        </process.ClassName>
+        <process.Print>
+            <method>peek</method>
+        </process.Print>
     </SpiderJobs>
 </Spider>

@@ -1,8 +1,5 @@
 package com.swd391.assi2.team2.spider.job;
 
-import com.swd391.assi2.team2.spider.job.complex.ComplexJob;
-import com.swd391.assi2.team2.spider.job.multiple.MultipleJobs;
-import com.swd391.assi2.team2.spider.job.single.SingleJob;
 import org.jdom2.Element;
 import org.springframework.stereotype.Service;
 
@@ -34,20 +31,14 @@ public class JobFactory {
 	}
 
 	private  void initData(Element objectData, Class<?> spiderJobClass, SpiderJob jobInstance) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		if(jobInstance instanceof SingleJob){
-			getSingleJob(objectData, spiderJobClass, jobInstance);
-		}else if(jobInstance instanceof MultipleJobs) {
-			getMultipleJobs(objectData, (MultipleJobs) jobInstance);
-		}else if(jobInstance instanceof ComplexJob){
-			((ComplexJob) jobInstance).init(objectData);
-		}
+		initJobData(objectData, spiderJobClass, jobInstance);
 	}
 	/*
 	 * the reflection magic
 	 * - note that every field in the class must be String
 	 * - or else
 	 * */
-	public  SpiderJob getSingleJob(Element objectData, Class<?> spiderJobClass, Object job) throws  IllegalAccessException {
+	public  SpiderJob initJobData(Element objectData, Class<?> spiderJobClass, Object job) throws  IllegalAccessException {
 		Field[] fields = spiderJobClass.getDeclaredFields();
 		for (Field field : fields) {
 			Element nodeField = objectData.getChild(field.getName());
@@ -57,16 +48,16 @@ public class JobFactory {
 		}
 		return (SpiderJob)job;
 	}
-
-	private  void getMultipleJobs(Element objectData, MultipleJobs jobInstance) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		List<Element> children = objectData.getChildren();
-		for (Element childJobData : children) {
-			Class<?> childJobClass = Class.forName(SPIDER_JOB_PACKAGE_NAME + childJobData.getName());
-			SpiderJob childJobInstance = (SpiderJob) childJobClass.newInstance();
-			initData(childJobData, childJobClass, childJobInstance);
-			jobInstance.addJob(getSingleJob(childJobData, childJobClass, childJobInstance));
-		}
-	}
+//
+//	private  void getMultipleJobs(Element objectData, MultipleJobs jobInstance) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+//		List<Element> children = objectData.getChildren();
+//		for (Element childJobData : children) {
+//			Class<?> childJobClass = Class.forName(SPIDER_JOB_PACKAGE_NAME + childJobData.getName());
+//			SpiderJob childJobInstance = (SpiderJob) childJobClass.newInstance();
+//			initData(childJobData, childJobClass, childJobInstance);
+//			jobInstance.addJob(getSingleJob(childJobData, childJobClass, childJobInstance));
+//		}
+//	}
 
 
 }
