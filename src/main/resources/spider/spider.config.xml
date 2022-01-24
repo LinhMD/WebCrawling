@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Spider>
     <SpiderJobs>
-        <in.Visit>
+        <in.Visit id="nah">
             <url>https://123job.vn/jobs</url>
             <method>start</method>
         </in.Visit>
-        <process.ClassName>
+        <process.ClassName id="kha">
             <className>item-job-cpn__info</className>
             <method>findAll</method>
         </process.ClassName>
-        <process.Print>
-            <method>peek</method>
-        </process.Print>
+        
     </SpiderJobs>
 </Spider>

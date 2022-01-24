@@ -5,12 +5,13 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class JobFactory {
 	public static String SPIDER_JOB_PACKAGE_NAME = "com.swd391.assi2.team2.spider.job.";
-
+	public HashMap<String, SpiderJob> jobsMap = new HashMap<>();
 	/*
 	* start at this
 	* need to create jobs
@@ -24,30 +25,31 @@ public class JobFactory {
 
 			SpiderJob jobInstance = (SpiderJob) spiderJobClass.newInstance();
 			initData(objectData, spiderJobClass, jobInstance);
+			String jobID = objectData.getAttributeValue("id");
+			if(jobID != null && !jobID.isBlank())
+				jobsMap.put(jobID, jobInstance);
 			jobList.add(jobInstance);
 
 		}
 		return jobList;
 	}
 
-	private  void initData(Element objectData, Class<?> spiderJobClass, SpiderJob jobInstance) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		initJobData(objectData, spiderJobClass, jobInstance);
+	private  SpiderJob initData(Element objectData, Class<?> spiderJobClass, SpiderJob jobInstance) throws  IllegalAccessException {
+		Field[] fields = spiderJobClass.getDeclaredFields();
+		for (Field field : fields) {
+			Element nodeField = objectData.getChild(field.getName());
+			String value = nodeField.getValue();
+			if(value != null)
+				field.set(jobInstance, value.trim());
+		}
+		return jobInstance;
 	}
 	/*
 	 * the reflection magic
 	 * - note that every field in the class must be String
 	 * - or else
 	 * */
-	public  SpiderJob initJobData(Element objectData, Class<?> spiderJobClass, Object job) throws  IllegalAccessException {
-		Field[] fields = spiderJobClass.getDeclaredFields();
-		for (Field field : fields) {
-			Element nodeField = objectData.getChild(field.getName());
-			String value = nodeField.getValue();
-			if(value != null)
-				field.set(job, value.trim());
-		}
-		return (SpiderJob)job;
-	}
+
 //
 //	private  void getMultipleJobs(Element objectData, MultipleJobs jobInstance) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 //		List<Element> children = objectData.getChildren();
