@@ -1,4 +1,4 @@
-package com.swd391.assi2.team2.spider.job.in;
+package com.swd391.assi2.team2.spider.job.input;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -6,7 +6,6 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Visit extends InJob {
 	public String url;

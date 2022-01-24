@@ -1,9 +1,8 @@
-package com.swd391.assi2.team2.spider.job.in;
+package com.swd391.assi2.team2.spider.job.input;
 
 import com.swd391.assi2.team2.spider.job.SpiderJob;
 import org.jsoup.nodes.Element;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class InJob implements SpiderJob {
