@@ -1,12 +1,14 @@
-package com.swd391.assi2.team2.spider.job.process;
+package com.swd391.assi2.team2.spider.job.imp;
 
 
+import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
+import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class ClassName implements ProcessJob {
+public class ClassName implements FindJob, FilterJob {
 	public String className;
 	public String method;
 
@@ -54,16 +56,6 @@ public class ClassName implements ProcessJob {
 		return elements.stream()
 				.filter(e -> e.className().equals(this.className))
 				.collect(Collectors.toCollection(ArrayList::new));
-	}
-
-	@Override
-	public ArrayList<Element> map(ArrayList<Element> elements) {
-		return null;
-	}
-
-	@Override
-	public ArrayList<Element> peek(ArrayList<Element> elements) {
-		return null;
 	}
 
 

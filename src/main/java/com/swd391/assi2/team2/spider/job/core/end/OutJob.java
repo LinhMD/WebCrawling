@@ -1,9 +1,8 @@
-package com.swd391.assi2.team2.spider.job.result;
+package com.swd391.assi2.team2.spider.job.core.end;
 
-import com.swd391.assi2.team2.spider.job.SpiderJob;
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jsoup.nodes.Element;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -31,6 +30,10 @@ public interface  OutJob extends SpiderJob {
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
+	@Override
+	default MethodCall getMethodCall() {
+		return MethodCall.Collect;
+	}
 
 	@Override
 	default MethodCall[] getImplementMethods() {

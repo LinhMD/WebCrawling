@@ -1,6 +1,6 @@
-package com.swd391.assi2.team2.spider.job.input;
+package com.swd391.assi2.team2.spider.job.core.begin;
 
-import com.swd391.assi2.team2.spider.job.SpiderJob;
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;

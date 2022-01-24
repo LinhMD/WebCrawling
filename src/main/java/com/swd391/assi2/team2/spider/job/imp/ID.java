@@ -1,14 +1,16 @@
-package com.swd391.assi2.team2.spider.job.process;
+package com.swd391.assi2.team2.spider.job.imp;
 
+import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
+import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.Filter;
-import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.FindAll;
+import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.Filter;
+import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAll;
 
-public class ID implements ProcessJob {
+public class ID implements FindJob, FilterJob {
 
 	public String id;
 	public String method;
@@ -45,6 +47,7 @@ public class ID implements ProcessJob {
 	@Override
 	public ArrayList<Element> findAll(ArrayList<Element> elements) {
 		ArrayList<Element> result = new ArrayList<>();
+
 		elements.forEach(element -> result.add(element.getElementById(this.id)));
 		return result;
 	}
@@ -54,16 +57,6 @@ public class ID implements ProcessJob {
 		return elements.stream()
 				.filter(element -> element.id().equals(this.id))
 				.collect(Collectors.toCollection(ArrayList::new));
-	}
-
-	@Override
-	public ArrayList<Element> map(ArrayList<Element> elements) {
-		return null;
-	}
-
-	@Override
-	public ArrayList<Element> peek(ArrayList<Element> elements) {
-		return null;
 	}
 
 	@Override

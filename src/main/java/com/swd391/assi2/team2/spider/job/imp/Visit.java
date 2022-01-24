@@ -1,6 +1,7 @@
-package com.swd391.assi2.team2.spider.job.input;
+package com.swd391.assi2.team2.spider.job.imp;
 
-import com.swd391.assi2.team2.spider.job.process.ProcessJob;
+import com.swd391.assi2.team2.spider.job.core.begin.InJob;
+import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,10 +9,10 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.FindAll;
-import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.Start;
+import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAll;
+import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.Start;
 
-public class Visit implements InJob, ProcessJob {
+public class Visit implements InJob, FindJob {
 	public String url;
 	public String method;
 
@@ -50,21 +51,6 @@ public class Visit implements InJob, ProcessJob {
 			result.add(Jsoup.connect(link).get());
 		}
 		return result;
-	}
-
-	@Override
-	public ArrayList<Element> filter(ArrayList<Element> elements) {
-		return null;
-	}
-
-	@Override
-	public ArrayList<Element> map(ArrayList<Element> elements) {
-		return null;
-	}
-
-	@Override
-	public ArrayList<Element> peek(ArrayList<Element> elements) {
-		return null;
 	}
 
 	@Override

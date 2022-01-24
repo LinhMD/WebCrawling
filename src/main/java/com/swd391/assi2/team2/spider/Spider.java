@@ -1,9 +1,8 @@
 package com.swd391.assi2.team2.spider;
 
-import com.swd391.assi2.team2.spider.job.SpiderJob;
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jsoup.nodes.Element;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;

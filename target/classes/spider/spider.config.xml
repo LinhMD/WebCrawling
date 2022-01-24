@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Spider>
+<Spider id="spider1">
     <SpiderJobs>
-        <in.Visit id="nah">
+        <input.Visit id="nah">
             <url>https://123job.vn/jobs</url>
             <method>start</method>
-        </in.Visit>
+        </input.Visit>
         <process.ClassName id="kha">
             <className>item-job-cpn__info</className>
             <method>findAll</method>

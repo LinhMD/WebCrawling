@@ -1,4 +1,4 @@
-package com.swd391.assi2.team2.spider.job;
+package com.swd391.assi2.team2.spider.job.core;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,6 +33,7 @@ public interface SpiderJob{
 	default MethodCall getMethodCall(){
 		return MethodCall.Run;
 	}
+
 	/**
 	* @what:
 	* */

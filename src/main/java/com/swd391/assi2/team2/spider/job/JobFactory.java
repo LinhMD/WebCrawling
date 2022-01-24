@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job;
 
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jdom2.Element;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 public class JobFactory {
-	public static String SPIDER_JOB_PACKAGE_NAME = "com.swd391.assi2.team2.spider.job.";
+	public static String SPIDER_JOB_PACKAGE_NAME = "com.swd391.assi2.team2.spider.job.imp";
 	public HashMap<String, SpiderJob> jobsMap = new HashMap<>();
 	/*
 	* start at this
