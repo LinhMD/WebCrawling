@@ -5,7 +5,9 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Print extends ProcessJob {
+import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.Peek;
+
+public class Print implements ProcessJob {
 	public String method;
 	@Override
 	public ArrayList<Element> findAll(ArrayList<Element> elements) throws IOException, Exception {
@@ -30,6 +32,15 @@ public class Print extends ProcessJob {
 
 	@Override
 	public MethodCall getMethodCall() {
-		return MethodCall.Peek;
+		for (MethodCall value : MethodCall.values()) {
+			if(value.getMethodName().equals(method))
+				return value;
+		}
+		return Peek;
+	}
+
+	@Override
+	public MethodCall[] getImplementMethods() {
+		return new MethodCall[0];
 	}
 }

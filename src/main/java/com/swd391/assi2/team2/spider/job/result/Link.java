@@ -5,16 +5,20 @@ import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 
-public class Link extends OutJob {
+public class Link implements OutJob {
 
 
 	@Override
 	public Object collect(Element element) {
-		return null;
+		return new ArrayList<>(element.getElementsByTag("a"));
 	}
 
 	@Override
 	public Object collectFromList(ArrayList<Element> elements) {
-		return null;
+		ArrayList<Element> result = new ArrayList<>();
+		for (Element element : elements) {
+			result.addAll(element.getElementsByTag("a"));
+		}
+		return result;
 	}
 }

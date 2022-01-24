@@ -1,13 +1,8 @@
 package com.swd391.assi2.team2.spider.job;
 
-import org.jsoup.nodes.Element;
-
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public interface SpiderJob{
 
@@ -19,7 +14,8 @@ public interface SpiderJob{
 		Filter("filter"),
 		FindAll("findAll"),
 		Map("map"),
-		Peek("peek");
+		Peek("peek"),
+		Run("run");
 		final String methodName;
 		MethodCall(String methodName){
 			this.methodName = methodName;
@@ -30,72 +26,12 @@ public interface SpiderJob{
 		}
 	}
 
-	//the_in_part Start
-	/**
-	 * @why: Everything need to start at somewhere
-	 * */
-	default ArrayList<Element> start(ArrayList<Element> elements) throws IOException, NoSuchMethodException {
-		return null;
-	}
-
-	// the_chain_stream_combo/ process Start
-	/**
-	 * @param elements : list of element need to find <jobName/> on
-	 * @return a different list
-	 * */
-	ArrayList<Element> findAll(ArrayList<Element> elements) throws IOException, Exception;
-
-	/**
-	 * @param elements : list need to be filter out by <jobName/> some element, get it val() first then filter
-	 * @return the same list but with fewer elements
-	 * */
-	ArrayList<Element> filter(ArrayList<Element> elements);
-
-	/**
-	 * @param elements : list need to map to <jobName/>
-	 * @return a new different list with different type of elements
-	 * */
-	ArrayList<Element> map(ArrayList<Element> elements);
-
-	/**
-	 * @param elements : list need to do <jobName/>
-	 * @return the same list with the same element
-	 * */
-	ArrayList<Element> peek(ArrayList<Element> elements);
-	// the_chain_stream_combo End
-
-	//the output part
-	/**
-	 * @why: the element need to be converted into DTO model
-	 * @what: take the element and convert into Object
-	 * @param element element tobe convert
-	 * @return a DTO model object
-	 * */
-	Object collect(Element element) ;
-
-	/**
-	 * @why: sometimes they don't want to play nice
-	 *
-	 * */
-	Object collectFromList(ArrayList<Element> elements) ;
-
-	/**
-	 *  @what: same as collect but list
-	 * */
-	default ArrayList<Object> collects(ArrayList<Element>elements){
-
-		return elements.stream()
-				.map(this::collect)
-				.collect(Collectors.toCollection(ArrayList::new));
-	}
-	//the_main_part End
-
 	/**
 	 * @what: return the method at define at .config.xml file by tag <method></method>
 	 * @why: to automatically call the config method
 	 * */
 	default MethodCall getMethodCall(){
-		return MethodCall.FindAll;
+		return MethodCall.Run;
 	}
 	/**
 	* @what:
@@ -113,7 +49,6 @@ public interface SpiderJob{
 		if(Arrays.stream(this.getImplementMethods()).noneMatch(m -> m == this.getMethodCall()))
 			throw new NoSuchMethodException("Unsupported method " + this.getMethodCall());
 		Method method = this.getClass().getMethod(this.getMethodCall().getMethodName(), objectIn.getClass());
-		Object out = method.invoke(this, objectIn);
-		return out;
+		return method.invoke(this, objectIn);
 	}
 }

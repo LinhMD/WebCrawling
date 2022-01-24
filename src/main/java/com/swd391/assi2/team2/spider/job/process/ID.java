@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.Filter;
 import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.FindAll;
 
-public class ID extends ProcessJob {
+public class ID implements ProcessJob {
 
 	public String id;
 	public String method;
@@ -71,12 +71,13 @@ public class ID extends ProcessJob {
 		return new MethodCall[]{FindAll, Filter};
 	}
 
+
 	@Override
 	public MethodCall getMethodCall() {
 		for (MethodCall value : MethodCall.values()) {
 			if(value.getMethodName().equals(method))
 				return value;
 		}
-		return super.getMethodCall();
+		return FindAll;
 	}
 }

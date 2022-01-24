@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class ClassName extends ProcessJob {
+public class ClassName implements ProcessJob {
 	public String className;
 	public String method;
 
@@ -66,12 +66,14 @@ public class ClassName extends ProcessJob {
 		return null;
 	}
 
+
+
 	@Override
 	public MethodCall getMethodCall() {
 		for (MethodCall value : MethodCall.values()) {
 			if(value.getMethodName().equals(method))
 				return value;
 		}
-		return super.getMethodCall();
+		return null;
 	}
 }

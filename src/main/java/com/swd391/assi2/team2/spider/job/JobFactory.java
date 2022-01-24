@@ -44,22 +44,7 @@ public class JobFactory {
 		}
 		return jobInstance;
 	}
-	/*
-	 * the reflection magic
-	 * - note that every field in the class must be String
-	 * - or else
-	 * */
 
-//
-//	private  void getMultipleJobs(Element objectData, MultipleJobs jobInstance) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-//		List<Element> children = objectData.getChildren();
-//		for (Element childJobData : children) {
-//			Class<?> childJobClass = Class.forName(SPIDER_JOB_PACKAGE_NAME + childJobData.getName());
-//			SpiderJob childJobInstance = (SpiderJob) childJobClass.newInstance();
-//			initData(childJobData, childJobClass, childJobInstance);
-//			jobInstance.addJob(getSingleJob(childJobData, childJobClass, childJobInstance));
-//		}
-//	}
 
 
 }

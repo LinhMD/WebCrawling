@@ -5,31 +5,35 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
-public abstract class  OutJob implements SpiderJob {
-	@Override
-	public ArrayList<Element> findAll(ArrayList<Element> elements) throws IOException, Exception {
-		return null;
+public interface  OutJob extends SpiderJob {
+	/**
+	 * @why: the element need to be converted into DTO model
+	 * @what: take the element and convert into Object
+	 * @param element element tobe convert
+	 * @return a DTO model object
+	 * */
+	Object collect(Element element);
+
+	/**
+	 * @why: sometimes they don't want to play nice
+	 *
+	 * */
+	Object collectFromList(ArrayList<Element> elements);
+
+	/**
+	 *  @what: same as collect but list
+	 * */
+	default ArrayList<Object> collects(ArrayList<Element>elements){
+		return elements.stream()
+				.map(this::collect)
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
-	@Override
-	public ArrayList<Element> filter(ArrayList<Element> elements) {
-		return null;
-	}
 
 	@Override
-	public ArrayList<Element> map(ArrayList<Element> elements) {
-		return null;
-	}
-
-	@Override
-	public ArrayList<Element> peek(ArrayList<Element> elements) {
-		return null;
-	}
-
-
-	@Override
-	public MethodCall[] getImplementMethods() {
+	default MethodCall[] getImplementMethods() {
 		return new MethodCall[]{MethodCall.Collect, MethodCall.CollectFromList, MethodCall.Collects};
 	}
 }

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.Filter;
 import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.FindAll;
 
-public class Contains extends ProcessJob {
+public class Contains implements ProcessJob {
 	public String contains;
 	public String method;
 	public Contains() {
@@ -63,6 +63,6 @@ public class Contains extends ProcessJob {
 			if(value.getMethodName().equals(method))
 				return value;
 		}
-		return super.getMethodCall();
+		return Filter;
 	}
 }

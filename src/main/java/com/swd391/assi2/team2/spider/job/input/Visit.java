@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job.input;
 
+import com.swd391.assi2.team2.spider.job.process.ProcessJob;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,7 +8,10 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Visit extends InJob {
+import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.FindAll;
+import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.Start;
+
+public class Visit implements InJob, ProcessJob {
 	public String url;
 	public String method;
 
@@ -49,12 +53,31 @@ public class Visit extends InJob {
 	}
 
 	@Override
+	public ArrayList<Element> filter(ArrayList<Element> elements) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<Element> map(ArrayList<Element> elements) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<Element> peek(ArrayList<Element> elements) {
+		return null;
+	}
+
+	@Override
 	public MethodCall getMethodCall() {
-		return MethodCall.Start;
+		for (MethodCall value : MethodCall.values()) {
+			if(value.getMethodName().equals(method))
+				return value;
+		}
+		return Start;
 	}
 
 	@Override
 	public MethodCall[] getImplementMethods() {
-		return new MethodCall[]{MethodCall.Start};
+		return new MethodCall[]{Start, FindAll};
 	}
 }
