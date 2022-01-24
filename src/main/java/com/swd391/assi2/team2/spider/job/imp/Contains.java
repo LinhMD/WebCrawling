@@ -1,15 +1,17 @@
-package com.swd391.assi2.team2.spider.job.process;
+package com.swd391.assi2.team2.spider.job.imp;
 
 
+import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
+import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.Filter;
-import static com.swd391.assi2.team2.spider.job.SpiderJob.MethodCall.FindAll;
+import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.Filter;
+import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAll;
 
-public class Contains extends ProcessJob {
+public class Contains implements FindJob, FilterJob {
 	public String contains;
 	public String method;
 	public Contains() {
@@ -35,21 +37,10 @@ public class Contains extends ProcessJob {
 
 	@Override
 	public ArrayList<Element> filter(ArrayList<Element> elements) {
-
 		return elements.stream()
 				.filter(e -> e.val().contains(contains))
 				.collect(Collectors.toCollection(ArrayList::new));
 
-	}
-
-	@Override
-	public ArrayList<Element> map(ArrayList<Element> elements) {
-		return null;
-	}
-
-	@Override
-	public ArrayList<Element> peek(ArrayList<Element> elements) {
-		return null;
 	}
 
 	@Override
@@ -63,6 +54,6 @@ public class Contains extends ProcessJob {
 			if(value.getMethodName().equals(method))
 				return value;
 		}
-		return super.getMethodCall();
+		return Filter;
 	}
 }

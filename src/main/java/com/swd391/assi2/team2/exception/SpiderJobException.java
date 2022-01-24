@@ -1,6 +1,6 @@
 package com.swd391.assi2.team2.exception;
 
-import com.swd391.assi2.team2.spider.job.SpiderJob;
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 
 public class SpiderJobException extends Exception{
 	private SpiderJob.MethodCall methodCall;

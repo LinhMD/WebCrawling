@@ -1,13 +1,13 @@
 package com.swd391.assi2.team2.spider;
 
-import com.swd391.assi2.team2.spider.job.SpiderJob;
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jsoup.nodes.Element;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Spider {
+public class Spider implements SpiderJob{
 	List<SpiderJob> spiderJobs;
 
 	public Spider(List<SpiderJob> spiderJobs) {
@@ -45,4 +45,13 @@ public class Spider {
 	}
 
 
+	@Override
+	public MethodCall[] getImplementMethods() {
+		return new MethodCall[0];
+	}
+
+	@Override
+	public Object run(Object objectIn) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+		return SpiderJob.super.run(objectIn);
+	}
 }

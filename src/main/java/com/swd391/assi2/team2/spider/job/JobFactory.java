@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job;
 
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jdom2.Element;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 public class JobFactory {
-	public static String SPIDER_JOB_PACKAGE_NAME = "com.swd391.assi2.team2.spider.job.";
+	public static String SPIDER_JOB_PACKAGE_NAME = "com.swd391.assi2.team2.spider.job.imp";
 	public HashMap<String, SpiderJob> jobsMap = new HashMap<>();
 	/*
 	* start at this
@@ -44,22 +45,7 @@ public class JobFactory {
 		}
 		return jobInstance;
 	}
-	/*
-	 * the reflection magic
-	 * - note that every field in the class must be String
-	 * - or else
-	 * */
 
-//
-//	private  void getMultipleJobs(Element objectData, MultipleJobs jobInstance) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-//		List<Element> children = objectData.getChildren();
-//		for (Element childJobData : children) {
-//			Class<?> childJobClass = Class.forName(SPIDER_JOB_PACKAGE_NAME + childJobData.getName());
-//			SpiderJob childJobInstance = (SpiderJob) childJobClass.newInstance();
-//			initData(childJobData, childJobClass, childJobInstance);
-//			jobInstance.addJob(getSingleJob(childJobData, childJobClass, childJobInstance));
-//		}
-//	}
 
 
 }
