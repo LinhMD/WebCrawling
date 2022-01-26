@@ -4,6 +4,7 @@ package com.swd391.assi2.team2.spider.job.imp;
 import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
 import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class Contains implements FindJob, FilterJob {
 	@Override
 	public ArrayList<Element> filter(ArrayList<Element> elements) {
 		return elements.stream()
-				.filter(e -> e.val().contains(contains))
+				.filter(e -> e.text().contains(contains))
 				.collect(Collectors.toCollection(ArrayList::new));
 
 	}

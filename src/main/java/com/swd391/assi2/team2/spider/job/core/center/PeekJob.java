@@ -15,11 +15,11 @@ public interface PeekJob extends SpiderJob {
 
 	@Override
 	default MethodCall getMethodCall() {
-		return MethodCall.Collect;
+		return MethodCall.Peek;
 	}
 
 	@Override
 	default MethodCall[] getImplementMethods() {
-		return new MethodCall[]{MethodCall.Collect, MethodCall.CollectFromList, MethodCall.Collects};
+		return new MethodCall[]{MethodCall.Peek};
 	}
 }

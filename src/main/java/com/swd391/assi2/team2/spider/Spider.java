@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Spider implements SpiderJob{
+public class Spider implements SpiderJob {
 	List<SpiderJob> spiderJobs;
 
 	public Spider(List<SpiderJob> spiderJobs) {
@@ -33,7 +33,19 @@ public class Spider implements SpiderJob{
 				'}';
 	}
 
-	public void run(){
+
+	@Override
+	public MethodCall getMethodCall() {
+		return MethodCall.Run;
+	}
+
+	@Override
+	public MethodCall[] getImplementMethods() {
+		return new MethodCall[]{MethodCall.Run};
+	}
+
+	@Override
+	public Object run(Object objectIn) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 		Object result = new ArrayList<Element>();
 		for (SpiderJob spiderJob : this.spiderJobs) {
 			try {
@@ -42,16 +54,6 @@ public class Spider implements SpiderJob{
 				e.printStackTrace();
 			}
 		}
-	}
-
-
-	@Override
-	public MethodCall[] getImplementMethods() {
-		return new MethodCall[0];
-	}
-
-	@Override
-	public Object run(Object objectIn) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-		return SpiderJob.super.run(objectIn);
+		return result;
 	}
 }

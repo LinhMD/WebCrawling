@@ -13,8 +13,14 @@ public interface InJob extends SpiderJob {
 	 * @why: Everything need to start at somewhere
 	 * */
 	ArrayList<Element> start(ArrayList<Element> elements) throws IOException, NoSuchMethodException;
+
+	@Override
+	default MethodCall getMethodCall() {
+		return MethodCall.Start;
+	}
+
 	@Override
 	default MethodCall[] getImplementMethods() {
-		return new MethodCall[0];
+		return new MethodCall[]{MethodCall.Start};
 	}
 }
