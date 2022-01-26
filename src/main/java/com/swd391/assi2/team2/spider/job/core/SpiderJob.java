@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-public interface SpiderJob{
+public interface SpiderJob extends Runnable{
 
 	enum MethodCall{
 		Start("start"),
@@ -12,7 +12,9 @@ public interface SpiderJob{
 		CollectFromList("collectFromList"),
 		Collects("collects"),
 		Filter("filter"),
+		Evaluate("Evaluate"),
 		FindAll("findAll"),
+		FindOne("findOne"),
 		Map("map"),
 		Peek("peek"),
 		Run("run");
@@ -51,5 +53,14 @@ public interface SpiderJob{
 			throw new NoSuchMethodException("Unsupported method " + this.getMethodCall());
 		Method method = this.getClass().getMethod(this.getMethodCall().getMethodName(), objectIn.getClass());
 		return method.invoke(this, objectIn);
+	}
+
+	@Override
+	default void run() {
+		try {
+			this.run(null);
+		} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 }

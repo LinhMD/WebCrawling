@@ -13,4 +13,17 @@ public interface FindJob extends SpiderJob {
 	 * */
 	ArrayList<Element> findAll(ArrayList<Element> elements) throws IOException, Exception;
 
+	default Element findOne(ArrayList<Element> elements) throws Exception {
+		return findAll(elements).get(0);
+	}
+
+	@Override
+	default MethodCall getMethodCall() {
+		return MethodCall.FindAll;
+	}
+
+	@Override
+	default MethodCall[] getImplementMethods() {
+		return new MethodCall[]{MethodCall.FindAll};
+	}
 }

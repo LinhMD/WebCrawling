@@ -12,4 +12,14 @@ public interface MapJob extends SpiderJob {
 	 * */
 	ArrayList<Element> map(ArrayList<Element> elements);
 
+	@Override
+	default MethodCall getMethodCall() {
+		return MethodCall.Map;
+	}
+
+	@Override
+	default MethodCall[] getImplementMethods() {
+		return new MethodCall[]{MethodCall.Map};
+	}
+
 }

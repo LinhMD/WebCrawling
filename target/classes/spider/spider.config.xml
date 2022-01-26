@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Spider id="spider1">
     <SpiderJobs>
-        <input.Visit id="nah">
-            <url>https://123job.vn/jobs</url>
+        <Visit id="nah">
+            <url>https://123job.vn/viec-lam/nhan-vien-phuc-vu-QJDa6Wk69G</url>
             <method>start</method>
-        </input.Visit>
-        <process.ClassName id="kha">
-            <className>item-job-cpn__info</className>
-            <method>findAll</method>
-        </process.ClassName>
+        </Visit>
+<!--        <ClassName id="kha">-->
+<!--            <className>item-job-cpn__info</className>-->
+<!--            <method>findAll</method>-->
+<!--        </ClassName>-->
+<!--        <Tag>-->
+<!--            <tagName>a</tagName>-->
+<!--            <tagName>a</tagName>-->
+<!--            <method>findAll</method>-->
+<!--        </Tag>-->
+<!--        -->
+<!--        <getTagHaveChildrenContainsValue>-->
+<!--            <value>Yêu cầu công việc</value>-->
+<!--            <method>findAll</method>-->
+<!--        </getTagHaveChildrenContainsValue>-->
         
+        <CreateModel>
+            <ModelClass>DataModel</ModelClass>
+            <method>collectFromList</method>
+            <SpiderJobs>
+                <Assign>
+                    <field>string1</field>
+                    <SpiderJobs>
+                        <ClassName>
+                            <className>box-info-job</className>
+                            <method>findOne</method>
+                        </ClassName>
+                    </SpiderJobs>
+                </Assign>
+                <Assign>
+                    <field>string2</field>
+                    <SpiderJobs>
+                        <ClassName>
+                            <className>job-title</className>
+                            <method>findOne</method>
+                        </ClassName>
+                    </SpiderJobs>
+                </Assign>
+            </SpiderJobs>
+        </CreateModel>
     </SpiderJobs>
 </Spider>

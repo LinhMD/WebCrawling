@@ -38,7 +38,7 @@ public class ClassName implements FindJob, FilterJob {
 
 	@Override
 	public MethodCall[] getImplementMethods() {
-		return new MethodCall[]{MethodCall.Filter, MethodCall.FindAll};
+		return new MethodCall[]{MethodCall.Filter, MethodCall.FindAll, MethodCall.FindOne};
 	}
 
 	@Override
@@ -47,7 +47,6 @@ public class ClassName implements FindJob, FilterJob {
 		for (Element e : elements) {
 			result.addAll(e.getElementsByClass(this.className));
 		}
-		System.out.println(result.size());
 		return result;
 	}
 
@@ -66,6 +65,6 @@ public class ClassName implements FindJob, FilterJob {
 			if(value.getMethodName().equals(method))
 				return value;
 		}
-		return null;
+		return MethodCall.FindAll;
 	}
 }

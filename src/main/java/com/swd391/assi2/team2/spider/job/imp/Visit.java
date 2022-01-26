@@ -47,8 +47,9 @@ public class Visit implements InJob, FindJob {
 	public ArrayList<Element> findAll(ArrayList<Element> elements) throws Exception {
 		ArrayList<Element> result = new ArrayList<>();
 		for (Element element : elements) {
+
 			String link = element.attr("href");
-			result.add(Jsoup.connect(link).get());
+			result.add(Jsoup.connect(link).post());
 		}
 		return result;
 	}
