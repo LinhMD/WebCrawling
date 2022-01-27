@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spider id="spider1">
+    <SpiderJobs>
+        <Visit id="nah">
+            <url>https://123job.vn/company/co-phan-dau-tu-the-gioi-di-dong-g5zpkKKYVX</url>
+            <method>start</method>
+        </Visit>
+
+
+        <ClassName>
+            <className>cpn-overview</className>
+            <method>findOne</method>
+        </ClassName>
+
+
+        <CreateModel>
+            <ModelClass>job123.company</ModelClass>
+            <!-- modelclass : class minh muon tao ra  -->
+
+            <method>collectFromList</method>
+            <SpiderJobs>
+                <Assign>
+                    <field>hotline</field>
+                    <SpiderJobs>
+                        <Contains>
+                            <contains>Hotline</contains>
+                            <method>findOne</method>
+                        </Contains>
+                        <GetSibling>
+                        </GetSibling>
+                    </SpiderJobs>
+                </Assign>
+            </SpiderJobs>
+        </CreateModel>
+    </SpiderJobs>
+</Spider>

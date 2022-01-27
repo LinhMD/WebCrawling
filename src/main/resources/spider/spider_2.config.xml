@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spider id="spider2">
+    <SpiderJobs>
+        <Visit>
+            <url>https://topdev.vn/it-jobs/load-more-job/page=2&amp;last_page=9&amp;skill_str=Java&amp;keyword_str=&amp;province_id=&amp;locale=en</url>
+            <method>start</method>
+        </Visit>
+        <ClassName>
+            <className>box-job</className>
+            <method>findAll</method>
+        </ClassName>
+    </SpiderJobs>
+</Spider>
