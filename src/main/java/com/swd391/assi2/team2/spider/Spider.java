@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Spider implements SpiderJob {
-	List<SpiderJob> spiderJobs;
+	public String id;
+
+	public List<SpiderJob> spiderJobs;
 
 	public Spider(List<SpiderJob> spiderJobs) {
 		this.spiderJobs = spiderJobs;
@@ -55,5 +57,18 @@ public class Spider implements SpiderJob {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Spider){
+			return this.id.equals(((Spider) obj).id);
+		}
+		return false;
 	}
 }

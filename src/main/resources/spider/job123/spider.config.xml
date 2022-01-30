@@ -18,7 +18,6 @@
                         </ClassName>
                         <GetText/>
                     </SpiderJobs>
-                    
                 </Assign>
                 <Assign>
                     <field>company</field>

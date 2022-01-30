@@ -5,7 +5,6 @@ import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.end.OutJob;
 import org.jsoup.nodes.Element;
-import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -26,7 +25,7 @@ public class CreateModel extends ComplexJob implements OutJob {
 	public CreateModel(JobFactory jobFactory, String method, Class<? extends DataModel> modelClass, List<SpiderJob> outJobs) {
 		this.jobFactory = jobFactory;
 		this.method = method;
-		ModelClass = modelClass;
+		this.ModelClass = modelClass;
 		this.jobList = outJobs;
 	}
 
