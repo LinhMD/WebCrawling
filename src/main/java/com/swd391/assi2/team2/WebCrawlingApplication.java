@@ -1,8 +1,11 @@
 package com.swd391.assi2.team2;
 
+import com.swd391.assi2.team2.model.DataModel;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.SpiderFactory;
 import com.swd391.assi2.team2.spider.job.JobFactory;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -34,11 +37,14 @@ public class WebCrawlingApplication  implements ApplicationRunner {
 //			Elements link = element.getElementsByTag("a");
 //			System.out.println(link.attr("href"));
 //		});
-//		Document jobDetail = Jsoup.connect("https://123job.vn/viec-lam/tuyen-dung-nhan-vien-sale-khong-yeu-cau-kinh-nghiem-Mv91wVnOqW").get();
+
 		Spider spider = spiderFactory.getSpider("src/main/resources/spider/spider.config.xml");
 		Object run = spider.run(null);
 		System.out.println(spider);
 		System.out.println(run);
-
+		System.out.println(run instanceof DataModel);
+//
+//		Document jobDetail = Jsoup.connect("https://123job.vn/viec-lam/nhan-vien-phuc-vu-QJDa6Wk69G").get();
+//		System.out.println(jobDetail.select("div.content-group:contains(Mô tả công việc) > div"));
 	}
 }

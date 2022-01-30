@@ -14,6 +14,8 @@ public interface InJob extends SpiderJob {
 	 * */
 	ArrayList<Element> start(ArrayList<Element> elements) throws IOException, NoSuchMethodException;
 
+	Element start() throws IOException;
+
 	@Override
 	default MethodCall getMethodCall() {
 		return MethodCall.Start;
