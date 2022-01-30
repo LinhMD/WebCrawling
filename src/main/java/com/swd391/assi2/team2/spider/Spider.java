@@ -46,7 +46,7 @@ public class Spider implements SpiderJob {
 
 	@Override
 	public Object run(Object objectIn) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-		Object result = new ArrayList<Element>();
+		Object result = null;
 		for (SpiderJob spiderJob : this.spiderJobs) {
 			try {
 				result = spiderJob.run(result);

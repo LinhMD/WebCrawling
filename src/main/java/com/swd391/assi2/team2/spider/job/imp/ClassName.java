@@ -4,7 +4,9 @@ package com.swd391.assi2.team2.spider.job.imp;
 import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
 import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -51,12 +53,28 @@ public class ClassName implements FindJob, FilterJob {
 	}
 
 	@Override
+	public ArrayList<Element> findAll(Element element) throws IOException, Exception {
+		return new ArrayList<>(element.getElementsByClass(className));
+	}
+
+
+
+	@Override
+	public Element findOne(Element element) throws Exception {
+		return element.getElementsByClass(className).first();
+	}
+
+	@Override
 	public ArrayList<Element> filter(ArrayList<Element> elements) {
 		return elements.stream()
 				.filter(e -> e.className().equals(this.className))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
+	@Override
+	public ArrayList<Element> filter(Element element) {
+		return new ArrayList<>(element.getElementsByClass(className));
+	}
 
 
 	@Override

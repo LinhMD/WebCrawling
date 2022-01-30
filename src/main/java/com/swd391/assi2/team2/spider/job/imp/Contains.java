@@ -6,15 +6,17 @@ import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.Filter;
-import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAll;
+import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.*;
 
 public class Contains implements FindJob, FilterJob {
+
 	public String contains;
 	public String method;
+
 	public Contains() {
 	}
 
@@ -37,6 +39,21 @@ public class Contains implements FindJob, FilterJob {
 	}
 
 	@Override
+	public Element findOne(ArrayList<Element> elements) throws Exception {
+		return FindJob.super.findOne(elements);
+	}
+
+	@Override
+	public ArrayList<Element> findAll(Element element) throws IOException, Exception {
+		return new ArrayList<>(element.getElementsContainingText(contains));
+	}
+
+	@Override
+	public Element findOne(Element element) throws Exception {
+		return element.getElementsContainingText(contains).last();
+	}
+
+	@Override
 	public ArrayList<Element> filter(ArrayList<Element> elements) {
 		return elements.stream()
 				.filter(e -> e.text().contains(contains))
@@ -45,8 +62,14 @@ public class Contains implements FindJob, FilterJob {
 	}
 
 	@Override
+	public ArrayList<Element> filter(Element element) {
+		Elements elements = element.getElementsContainingText(contains);
+		return new ArrayList<>(elements);
+	}
+
+	@Override
 	public MethodCall[] getImplementMethods() {
-		return new MethodCall[]{FindAll, Filter};
+		return new MethodCall[]{FindAll, FindOne, Filter};
 	}
 
 	@Override
