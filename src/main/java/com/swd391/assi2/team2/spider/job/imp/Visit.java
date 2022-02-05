@@ -39,6 +39,14 @@ public class Visit implements InJob, FindJob {
 		return result;
 	}
 
+	@Override
+	public Element start() throws IOException {
+		Document document = Jsoup.connect(url).get();
+		Element element = new Element("div");
+		element.html(document.html());
+		return element;
+	}
+
 	/**
 	 * @param elements a list of <a href=""/> elements
 	 * @return the documents get from the link
@@ -52,6 +60,11 @@ public class Visit implements InJob, FindJob {
 			result.add(Jsoup.connect(link).post());
 		}
 		return result;
+	}
+
+	@Override
+	public ArrayList<Element> findAll(Element element) throws IOException, Exception {
+		return null;
 	}
 
 	@Override

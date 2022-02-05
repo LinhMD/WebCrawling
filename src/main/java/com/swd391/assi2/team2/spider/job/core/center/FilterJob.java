@@ -12,11 +12,17 @@ public interface FilterJob extends SpiderJob {
 	 * */
 	ArrayList<Element> filter(ArrayList<Element> elements);
 
+	/**
+	 * @param element : the children of which need to be filter out by <jobName/>
+	 * @return a new filtered list (if only 1 element can be found return a list of 1 element)
+	 * */
+	ArrayList<Element> filter(Element element);
+
+
 	@Override
 	default MethodCall getMethodCall() {
 		return MethodCall.Filter;
 	}
-
 
 	@Override
 	default MethodCall[] getImplementMethods() {

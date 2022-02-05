@@ -1,11 +1,9 @@
 package com.swd391.assi2.team2.spider.job.imp;
-
-import com.swd391.assi2.team2.model.DataModel;
+import com.swd391.assi2.team2.job123.DataModel;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.end.OutJob;
 import org.jsoup.nodes.Element;
-import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -13,10 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 public class CreateModel extends ComplexJob implements OutJob {
-
-
 	JobFactory jobFactory = new JobFactory();
 
 	public Class<? extends DataModel> ModelClass;
@@ -35,28 +30,34 @@ public class CreateModel extends ComplexJob implements OutJob {
 
 	@Override
 	public Object collect(Element element) {
-		return null;
-	}
-
-	@Override
-	public Object collectFromList(ArrayList<Element> elements) {
 		try {
 			Constructor<? extends DataModel> constructor = ModelClass.getConstructor();
 			DataModel dataModel = constructor.newInstance();
 			for (SpiderJob spiderJob : jobList) {
 				try {
-					Object result = spiderJob.run(elements);
+					Object result = spiderJob.run(element);
 					String fieldName = ((Assign) spiderJob).field;
 					Field field = ModelClass.getField(fieldName);
-					field.set(dataModel, result);
+					if(field.getType().isAssignableFrom(String.class)){
+						field.set(dataModel, result.toString());
+					}else {
+						field.set(dataModel, result);
+					}
+
 				} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | NoSuchFieldException e) {
 					e.printStackTrace();
 				}
 			}
+
 			return dataModel;
 		} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public Object collect(ArrayList<Element> elements) {
 		return null;
 	}
 

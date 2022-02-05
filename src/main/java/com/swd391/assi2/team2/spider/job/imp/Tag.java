@@ -17,12 +17,27 @@ public class Tag implements FindJob, FilterJob {
 		return null;	}
 
 	@Override
+	public ArrayList<Element> filter(Element element) {
+		return null;
+	}
+
+	@Override
 	public ArrayList<Element> findAll(ArrayList<Element> elements) throws IOException, Exception {
 		ArrayList<Element> result = new ArrayList<>();
 		for (Element element : elements) {
 			result.addAll(element.getElementsByTag(tagName));
 		}
 		return result;
+	}
+
+	@Override
+	public ArrayList<Element> findAll(Element element) throws IOException, Exception {
+		return new ArrayList<>(element.getElementsByTag(tagName));
+	}
+
+	@Override
+	public Element findOne(Element element) throws Exception {
+		return element.getElementsByTag(tagName).first();
 	}
 
 

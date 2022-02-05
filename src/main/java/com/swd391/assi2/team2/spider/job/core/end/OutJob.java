@@ -19,7 +19,7 @@ public interface  OutJob extends SpiderJob {
 	 * @why: sometimes they don't want to play nice
 	 *
 	 * */
-	Object collectFromList(ArrayList<Element> elements);
+	Object collect(ArrayList<Element> elements);
 
 	/**
 	 *  @what: same as collect but list
@@ -37,6 +37,6 @@ public interface  OutJob extends SpiderJob {
 
 	@Override
 	default MethodCall[] getImplementMethods() {
-		return new MethodCall[]{MethodCall.Collect, MethodCall.CollectFromList, MethodCall.Collects};
+		return new MethodCall[]{MethodCall.Collect, MethodCall.Collects};
 	}
 }

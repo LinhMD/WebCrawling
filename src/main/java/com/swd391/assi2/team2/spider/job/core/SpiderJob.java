@@ -9,7 +9,6 @@ public interface SpiderJob extends Runnable{
 	enum MethodCall{
 		Start("start"),
 		Collect("collect"),
-		CollectFromList("collectFromList"),
 		Collects("collects"),
 		Filter("filter"),
 		Evaluate("Evaluate"),
@@ -51,8 +50,13 @@ public interface SpiderJob extends Runnable{
 	default Object run(Object objectIn) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 		if(Arrays.stream(this.getImplementMethods()).noneMatch(m -> m == this.getMethodCall()))
 			throw new NoSuchMethodException("Unsupported method " + this.getMethodCall());
-		Method method = this.getClass().getMethod(this.getMethodCall().getMethodName(), objectIn.getClass());
-		return method.invoke(this, objectIn);
+		if(objectIn == null){
+			Method method = this.getClass().getMethod(this.getMethodCall().getMethodName());
+			return method.invoke(this);
+		}else {
+			Method method = this.getClass().getMethod(this.getMethodCall().getMethodName(), objectIn.getClass());
+			return method.invoke(this, objectIn);
+		}
 	}
 
 	@Override
