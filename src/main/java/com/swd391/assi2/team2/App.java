@@ -1,8 +1,9 @@
 package com.swd391.assi2.team2;
 
+import com.swd391.assi2.team2.job123.models.Job;
 import com.swd391.assi2.team2.job123.models.Recruitment;
-import com.swd391.assi2.team2.job123.services.DetailsRepository;
-import com.swd391.assi2.team2.job123.services.RecruitmentRepository;
+import com.swd391.assi2.team2.job123.repository.JobRepository;
+import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.SpiderFactory;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,21 +14,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
-
 @SpringBootApplication
 public class App implements ApplicationRunner {
 	@Autowired
 	SpiderFactory spiderFactory;
 	@Autowired
 	JobFactory jobFactory;
+	@Autowired
+	JobRepository jobRepository;
 
 	//-----------
-	@Autowired
-	DetailsRepository detailsRepository;
-	@Autowired
-	RecruitmentRepository recruitmentRepository;
-
 
 	public static void main(String[] args) {
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(App.class);
@@ -37,7 +33,6 @@ public class App implements ApplicationRunner {
 
 		//---------------
 		ApplicationContext ctx = SpringApplication.run(App.class, args);
-		DetailsRepository detailsRepository = ctx.getBean(DetailsRepository.class);
 
 
 
@@ -58,22 +53,21 @@ public class App implements ApplicationRunner {
 //			System.out.println(link.attr("href"));
 //		});
 
-//		Spider spider = spiderFactory.getSpider("src/main/resources/spider/spider.config.xml");
-//		Object run = spider.run(null);
+		Spider spider = spiderFactory.getSpider("src/main/resources/spider/spider.config.xml");
+		Object run = spider.run(null);
 //		System.out.println(spider);
 //		System.out.println(run);
 //		System.out.println(run instanceof DataModel);
-//
-
-
 
 //		Document jobDetail = Jsoup.connect("https://123job.vn/viec-lam/nhan-vien-phuc-vu-QJDa6Wk69G").get();
 //		System.out.println(jobDetail.select("div.content-group:contains(Mô tả công việc) > div"));
+//		ArrayList<Recruitment> listRec = new ArrayList<>();
+//        recruitmentRepository.save(listRec);
+		Recruitment recruitment = (Recruitment) run;
+		Job job = jobRepository.makeTransaction(recruitment);
+		//jobRepository.save(job); phần benefit và requirment quá dài để lưu vào database
+		System.out.println(job.toString());
 
-
-
-		ArrayList<Recruitment> listRec = new ArrayList<>();
-        recruitmentRepository.save(listRec);
 	}
 
 }
