@@ -29,7 +29,7 @@ public class JobFactory {
 
 			SpiderJob jobInstance = (SpiderJob) spiderJobClass.newInstance();
 			if(jobInstance instanceof ComplexJob){
-				((ComplexJob) jobInstance).initData(objectData);
+				((ComplexJob) jobInstance).initData(objectData, this);
 			}else
 				initData(objectData, spiderJobClass, jobInstance);
 			String jobID = objectData.getAttributeValue("id");

@@ -14,7 +14,8 @@ public class Tag implements FindJob, FilterJob {
 	public String tagName;
 	@Override
 	public ArrayList<Element> filter(ArrayList<Element> elements) {
-		return null;	}
+		return null;
+	}
 
 	@Override
 	public ArrayList<Element> filter(Element element) {

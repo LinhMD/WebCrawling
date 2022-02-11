@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spider id="NavSpider">
+    <SpiderJobs>
+        <Visit>
+            <url>https://123job.vn/</url>
+            <method>start</method>
+        </Visit>
+        <Tag>
+            <tagName>a</tagName>
+            <method>findAll</method>
+        </Tag>
+        <AddUrlToQueue>
+            <queueName>job123</queueName>
+        </AddUrlToQueue>
+        <Repeat>
+            <interval>100</interval>
+            <SpiderJobs>
+                <VisitFromUrlQueue>
+                    <queueName>job123</queueName>
+                    <method>start</method>
+                </VisitFromUrlQueue>
+                <Tag>
+                    <tagName>a</tagName>
+                    <method>findAll</method>
+                </Tag>
+                <AddUrlToQueue>
+                    <queueName>job123</queueName>
+                </AddUrlToQueue>
+            </SpiderJobs>
+        </Repeat>
+    </SpiderJobs>
+</Spider>

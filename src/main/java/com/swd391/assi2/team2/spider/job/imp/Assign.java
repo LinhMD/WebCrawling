@@ -11,17 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Assign extends ComplexJob implements OutJob {
-
-	JobFactory jobFactory = new JobFactory();
-
 	public String field;
 	public List<SpiderJob> jobList = new ArrayList<>();
 
 	public Assign() {
 	}
 
-	public Assign(JobFactory jobFactory, String field, List<SpiderJob> jobList) {
-		this.jobFactory = jobFactory;
+	public Assign(String field, List<SpiderJob> jobList) {
 		this.field = field;
 		this.jobList = jobList;
 	}
@@ -63,7 +59,7 @@ public class Assign extends ComplexJob implements OutJob {
 	}
 
 	@Override
-	public SpiderJob initData(org.jdom2.Element element) {
+	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory) {
 		field = element.getChildText("field");
 		try {
 			this.jobList.addAll(jobFactory.getJobs(element.getChild("SpiderJobs").getChildren()));

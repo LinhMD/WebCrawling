@@ -2,6 +2,7 @@ package com.swd391.assi2.team2.spider.job.imp;
 
 import com.swd391.assi2.team2.spider.job.core.begin.InJob;
 import com.swd391.assi2.team2.spider.job.core.center.FindJob;
+import com.swd391.assi2.team2.utils.VisitedUrl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -42,6 +43,7 @@ public class Visit implements InJob, FindJob {
 	@Override
 	public Element start() throws IOException {
 		Document document = Jsoup.connect(url).get();
+		VisitedUrl.getInstance().add(url);
 		Element element = new Element("div");
 		element.html(document.html());
 		return element;
