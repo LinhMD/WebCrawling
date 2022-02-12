@@ -43,8 +43,9 @@ public class VisitFromUrlQueue extends ComplexJob implements InJob {
 				if(!checkStartWith) continue;
 
 				if(!VisitedUrl.getInstance().contains(url)){
-					System.out.println(url);
-					System.out.println(urlQueue.size());
+
+					System.out.println("Visiting: "+url);
+					System.out.println("pool size: " + urlQueue.size());
 					Document document = Jsoup.connect(url).get();
 					Element element = new Element("div");
 					element.html(document.html());
