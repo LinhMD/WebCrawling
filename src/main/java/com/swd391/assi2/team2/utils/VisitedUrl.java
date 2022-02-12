@@ -8,4 +8,5 @@ public class VisitedUrl extends TreeSet<String> {
 	public static VisitedUrl getInstance(){
 		return INSTANCE;
 	}
+
 }

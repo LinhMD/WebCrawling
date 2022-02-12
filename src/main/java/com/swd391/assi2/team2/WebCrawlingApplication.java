@@ -53,10 +53,12 @@ public class WebCrawlingApplication  implements ApplicationRunner {
 //		System.out.println(spiderFactory.spiderMap);
 		Spider spider = spiderFactory.getSpider("src/main/resources/spider/job123/navigate_spider.config.xml");
 		Object run = spider.run(null);
-//		URLQueue.URL_QUEUE_HASHMAP.values().forEach(System.out::println);
+		System.out.println("----------------------------------------");
+		URLQueue.URL_QUEUE_HASHMAP.values().forEach(e -> {
+			e.forEach(System.out::println);
+			System.out.println(e.size());
+		});
 
-		VisitedUrl.getInstance().forEach(System.out::println);
-		System.out.println(VisitedUrl.getInstance().size());
-		System.out.println(spider);
+
 	}
 }

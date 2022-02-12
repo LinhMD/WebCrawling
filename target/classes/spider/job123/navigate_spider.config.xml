@@ -2,7 +2,7 @@
 <Spider id="NavSpider">
     <SpiderJobs>
         <Visit>
-            <url>https://123job.vn/</url>
+            <url>https://123job.vn/jobs</url>
             <method>start</method>
         </Visit>
         <Tag>
@@ -11,13 +11,25 @@
         </Tag>
         <AddUrlToQueue>
             <queueName>job123</queueName>
+            <addIfMissingUrl>https://123job.vn</addIfMissingUrl>
+            <urlStartWiths>
+                <url>https://123job.vn/viec-lam</url>
+                <url>https://123job.vn/jobs</url>
+                <url>https://123job.vn/việc-làm-</url>
+                <url>https://123job.vn/t/</url>
+            </urlStartWiths>
         </AddUrlToQueue>
         <Repeat>
             <interval>100</interval>
             <SpiderJobs>
                 <VisitFromUrlQueue>
-                    <queueName>job123</queueName>
                     <method>start</method>
+                    <queueName>job123</queueName>
+                    <urlStartWiths>
+                        <url>https://123job.vn/jobs</url>
+                        <url>https://123job.vn/việc-làm-</url>
+                        <url>https://123job.vn/t/</url>
+                    </urlStartWiths>
                 </VisitFromUrlQueue>
                 <Tag>
                     <tagName>a</tagName>
@@ -25,6 +37,13 @@
                 </Tag>
                 <AddUrlToQueue>
                     <queueName>job123</queueName>
+                    <addIfMissingUrl>https://123job.vn</addIfMissingUrl>
+                    <urlStartWiths>
+                        <url>https://123job.vn/viec-lam</url>
+                        <url>https://123job.vn/jobs</url>
+                        <url>https://123job.vn/việc-làm-</url>
+                        <url>https://123job.vn/t/</url>
+                    </urlStartWiths>
                 </AddUrlToQueue>
             </SpiderJobs>
         </Repeat>
