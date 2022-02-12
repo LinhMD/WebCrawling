@@ -10,9 +10,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CreateModel extends ComplexJob implements OutJob {
-	JobFactory jobFactory = new JobFactory();
 
 	public Class<? extends DataModel> ModelClass;
 
@@ -21,10 +22,9 @@ public class CreateModel extends ComplexJob implements OutJob {
 	public CreateModel() {
 	}
 
-	public CreateModel(JobFactory jobFactory, String method, Class<? extends DataModel> modelClass, List<SpiderJob> outJobs) {
-		this.jobFactory = jobFactory;
+	public CreateModel(String method, Class<? extends DataModel> modelClass, List<SpiderJob> outJobs) {
 		this.method = method;
-		ModelClass = modelClass;
+		this.ModelClass = modelClass;
 		this.jobList = outJobs;
 	}
 
@@ -48,7 +48,6 @@ public class CreateModel extends ComplexJob implements OutJob {
 					e.printStackTrace();
 				}
 			}
-
 			return dataModel;
 		} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
@@ -58,11 +57,14 @@ public class CreateModel extends ComplexJob implements OutJob {
 
 	@Override
 	public Object collect(ArrayList<Element> elements) {
-		return null;
+		return elements.stream()
+				.map(this::collect)
+				.filter(Objects::nonNull)
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	@Override
-	public SpiderJob initData(org.jdom2.Element element) {
+	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory) {
 		try {
 			method = element.getChildText("method");
 			ModelClass = (Class<? extends DataModel>) Class.forName("com.swd391.assi2.team2." + element.getChildText("ModelClass"));

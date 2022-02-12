@@ -4,6 +4,8 @@ import com.swd391.assi2.team2.model.DataModel;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.SpiderFactory;
 import com.swd391.assi2.team2.spider.job.JobFactory;
+import com.swd391.assi2.team2.utils.URLQueue;
+import com.swd391.assi2.team2.utils.VisitedUrl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -38,13 +40,25 @@ public class WebCrawlingApplication  implements ApplicationRunner {
 //			System.out.println(link.attr("href"));
 //		});
 
-		Spider spider = spiderFactory.getSpider("src/main/resources/spider/spider.config.xml");
-		Object run = spider.run(null);
-		System.out.println(spider);
-		System.out.println(run);
-		System.out.println(run instanceof DataModel);
-//
+//		Spider spider = spiderFactory.getSpider("src/main/resources/spider/job123/spider.config.xml");
+//		Object run = spider.run(null);
+//		System.out.println(spider);
+//		System.out.println(run);
+//		System.out.println(run instanceof DataModel);
+
 //		Document jobDetail = Jsoup.connect("https://123job.vn/viec-lam/nhan-vien-phuc-vu-QJDa6Wk69G").get();
 //		System.out.println(jobDetail.select("div.content-group:contains(Mô tả công việc) > div"));
+
+//		spiderFactory.getAllSpider("src/main/resources/spider");
+//		System.out.println(spiderFactory.spiderMap);
+		Spider spider = spiderFactory.getSpider("src/main/resources/spider/job123/navigate_spider.config.xml");
+		Object run = spider.run(null);
+		System.out.println("----------------------------------------");
+		URLQueue.URL_QUEUE_HASHMAP.values().forEach(e -> {
+			e.forEach(System.out::println);
+			System.out.println(e.size());
+		});
+
+
 	}
 }

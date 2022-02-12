@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class JobFactory {
 	public static String SPIDER_JOB_PACKAGE_NAME = "com.swd391.assi2.team2.spider.job.imp.";
-	public HashMap<String, SpiderJob> jobsMap = new HashMap<>();
+	public static HashMap<String, SpiderJob> JOBS_MAP = new HashMap<>();
 
 	/*
 	* start at this
@@ -29,12 +29,12 @@ public class JobFactory {
 
 			SpiderJob jobInstance = (SpiderJob) spiderJobClass.newInstance();
 			if(jobInstance instanceof ComplexJob){
-				((ComplexJob) jobInstance).initData(objectData);
+				((ComplexJob) jobInstance).initData(objectData, this);
 			}else
 				initData(objectData, spiderJobClass, jobInstance);
 			String jobID = objectData.getAttributeValue("id");
 			if(jobID != null && !jobID.isBlank())
-				jobsMap.put(jobID, jobInstance);
+				JOBS_MAP.put(jobID, jobInstance);
 			jobList.add(jobInstance);
 		}
 		return jobList;

@@ -6,7 +6,7 @@
             <method>start</method>
         </Visit>
         <CreateModel>
-            <ModelClass>job123.models.Recruitment</ModelClass>
+            <ModelClass>job123.Recruitment</ModelClass>
             <method>collect</method>
             <SpiderJobs>
                 <Assign>
@@ -18,14 +18,11 @@
                         </ClassName>
                         <GetText/>
                     </SpiderJobs>
-
                 </Assign>
                 <Assign>
                     <field>company</field>
                     <SpiderJobs>
                         <ClassName>
-
-
                             <className>cpn-title</className>
                             <method>findOne</method>
                         </ClassName>
@@ -63,11 +60,11 @@
                     <field>details</field>
                     <SpiderJobs>
                         <CreateModel>
-                            <ModelClass>job123.models.Details</ModelClass>
+                            <ModelClass>job123.Details</ModelClass>
                             <method>collect</method>
                             <SpiderJobs>
                                 <Assign>
-                                    <field>address</field>
+                                    <field>workAt</field>
                                     <SpiderJobs>
                                         <Select>
                                             <cssSelect>div.item:contains(Việc làm tại:)</cssSelect>
@@ -75,7 +72,6 @@
                                         <GetText/>
                                     </SpiderJobs>
                                 </Assign>
-
                                 <Assign>
                                     <field>salary</field>
                                     <SpiderJobs>
@@ -108,33 +104,6 @@
                                     <SpiderJobs>
                                         <Select>
                                             <cssSelect>div.item:contains(Hình thức:)</cssSelect>
-                                        </Select>
-                                        <GetText/>
-                                    </SpiderJobs>
-                                </Assign>
-                                <Assign>
-                                    <field>experience</field>
-                                    <SpiderJobs>
-                                        <Select>
-                                            <cssSelect>div.item:contains(Kinh nghiệm:)</cssSelect>
-                                        </Select>
-                                        <GetText/>
-                                    </SpiderJobs>
-                                </Assign>
-                                <Assign>
-                                    <field>qualification</field>
-                                    <SpiderJobs>
-                                        <Select>
-                                            <cssSelect>div.item:contains(Trình Độ:)</cssSelect>
-                                        </Select>
-                                        <GetText/>
-                                    </SpiderJobs>
-                                </Assign>
-                                <Assign>
-                                    <field>quantity</field>
-                                    <SpiderJobs>
-                                        <Select>
-                                            <cssSelect>div.item:contains(Số Lượng:)</cssSelect>
                                         </Select>
                                         <GetText/>
                                     </SpiderJobs>
