@@ -1,6 +1,6 @@
-package com.swd391.assi2.team2.model.job123;
+package com.swd391.assi2.team2.data.job123;
 
-import com.swd391.assi2.team2.model.DataModel;
+import com.swd391.assi2.team2.data.DataModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

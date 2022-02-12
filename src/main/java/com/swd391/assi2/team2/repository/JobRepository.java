@@ -1,14 +1,13 @@
-package com.swd391.assi2.team2.job123.repository;
+package com.swd391.assi2.team2.repository;
 
-import com.swd391.assi2.team2.job123.models.Details;
-import com.swd391.assi2.team2.job123.models.Job;
-import com.swd391.assi2.team2.job123.models.Recruitment;
+import com.swd391.assi2.team2.models.Job;
+import com.swd391.assi2.team2.data.job123.Details;
+import com.swd391.assi2.team2.data.job123.Recruitment;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface JobRepository extends JpaRepository<Job, Double> {
-    <S extends Job> S save(S s);
 
     default Job makeTransaction(@NotNull Recruitment recruitment) {
         Job job = new Job();

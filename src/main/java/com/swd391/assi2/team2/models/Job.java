@@ -1,4 +1,4 @@
-package com.swd391.assi2.team2.job123.models;
+package com.swd391.assi2.team2.models;
 
 import lombok.*;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private double id;
+    private int id;
 
     private Date submissionDeadline;
     private String salary;

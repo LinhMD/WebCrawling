@@ -20,7 +20,7 @@
             </urlStartWiths>
         </AddUrlToQueue>
         <Repeat>
-            <interval>10</interval>
+            <interval>2</interval>
             <SpiderJobs>
                 <VisitFromUrlQueue>
                     <method>start</method>
