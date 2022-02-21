@@ -67,7 +67,7 @@ public class CreateModel extends ComplexJob implements OutJob {
 	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory) {
 		try {
 			method = element.getChildText("method");
-			ModelClass = (Class<? extends DataModel>) Class.forName("com.swd391.assi2.team2.data" + element.getChildText("ModelClass"));
+			ModelClass = (Class<? extends DataModel>) Class.forName("com.swd391.assi2.team2.data." + element.getChildText("ModelClass"));
 			this.jobList.addAll(jobFactory.getJobs(element.getChild("SpiderJobs").getChildren()));
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();

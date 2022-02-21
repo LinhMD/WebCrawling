@@ -39,4 +39,6 @@ public interface  OutJob extends SpiderJob {
 	default MethodCall[] getImplementMethods() {
 		return new MethodCall[]{MethodCall.Collect, MethodCall.Collects};
 	}
+
+
 }

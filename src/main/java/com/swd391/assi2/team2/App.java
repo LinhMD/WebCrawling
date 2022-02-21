@@ -4,6 +4,8 @@ import com.swd391.assi2.team2.repository.JobRepository;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.SpiderFactory;
 import com.swd391.assi2.team2.spider.job.JobFactory;
+import com.swd391.assi2.team2.utils.FinalJobList;
+import com.swd391.assi2.team2.utils.URLQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -38,8 +40,10 @@ public class App implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 
 		Spider spider = spiderFactory.getSpider("src/main/resources/spider/job123/navigate_spider.config.xml");
+		 spider.run();
+         spider = spiderFactory.getSpider("src/main/resources/spider/job123/spider.config.xml");
 		Object run = spider.run(null);
-
+		System.out.println(FinalJobList.JOB_LIST);
 	}
 
 }

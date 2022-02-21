@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Spider id="spider1">
     <SpiderJobs>
-        <Visit id="nah">
-            <url>https://123job.vn/viec-lam/nhan-vien-phuc-vu-QJDa6Wk69G</url>
+        <!---->
+        <VisitFromUrlQueue>
             <method>start</method>
-        </Visit>
+            <queueName>job123</queueName>
+            <urlStartWiths>
+                <url>https://123job.vn/viec-lam</url>
+            </urlStartWiths>
+        </VisitFromUrlQueue>
+        <!---->
+
         <CreateModel>
             <ModelClass>job123.Recruitment</ModelClass>
             <method>collect</method>
@@ -64,7 +70,7 @@
                             <method>collect</method>
                             <SpiderJobs>
                                 <Assign>
-                                    <field>workAt</field>
+                                    <field>address</field>
                                     <SpiderJobs>
                                         <Select>
                                             <cssSelect>div.item:contains(Việc làm tại:)</cssSelect>
@@ -109,10 +115,14 @@
                                     </SpiderJobs>
                                 </Assign>
                             </SpiderJobs>
+
                         </CreateModel>
                     </SpiderJobs>
                 </Assign>
             </SpiderJobs>
         </CreateModel>
+        <SaveAllRecuiment>
+            <listJobName>s</listJobName>
+        </SaveAllRecuiment>>
     </SpiderJobs>
 </Spider>
