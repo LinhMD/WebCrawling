@@ -5,8 +5,9 @@ import com.swd391.assi2.team2.data.job123.Details;
 import com.swd391.assi2.team2.data.job123.Recruitment;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public interface JobRepository extends JpaRepository<Job, Double> {
 
     default Job makeTransaction(@NotNull Recruitment recruitment) {

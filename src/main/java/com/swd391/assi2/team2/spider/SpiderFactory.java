@@ -1,7 +1,8 @@
 package com.swd391.assi2.team2.spider;
 
+import com.swd391.assi2.team2.gui.SpiderFrame;
+import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.job.JobFactory;
-import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -23,11 +24,12 @@ import java.util.stream.Collectors;
 public class SpiderFactory {
 
 	public HashMap<String, Spider> spiderMap = new HashMap<>();
-	final
-	JobFactory jobFactory;
+	public final JobFactory jobFactory;
+	public final UnitOfWork work;
 
-	public SpiderFactory(JobFactory jobFactory) {
+	public SpiderFactory(JobFactory jobFactory, UnitOfWork work) {
 		this.jobFactory = jobFactory;
+		this.work = work;
 	}
 
 	public void getAllSpider(String filePath){
@@ -35,9 +37,9 @@ public class SpiderFactory {
 			List<Spider> spiders = Files.walk(Paths.get(filePath))
 					.filter(Files::isRegularFile)
 					.map(Path::toString).peek(System.out::println)
-					.map(filePath1 -> {
+					.map(f -> {
 						try {
-							return getSpider(filePath1);
+							return getSpider(f);
 						} catch (IOException | JDOMException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 							e.printStackTrace();
 						}
@@ -48,7 +50,6 @@ public class SpiderFactory {
 				System.out.println(spider.id);
 				spiderMap.put(spider.id, spider);
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,6 +72,9 @@ public class SpiderFactory {
 	private Spider initData(Spider spider, Element root) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		List<Element> jobs = root.getChild("SpiderJobs").getChildren();
 		spider.setSpiderJobs(jobFactory.getJobs(jobs, spider));
+
+		spider.frame = new SpiderFrame(work, spider);
+
 		return spider;
 	}
 

@@ -42,10 +42,6 @@ public class Select implements  FindJob {
 		return result;
 	}
 
-	@Override
-	public Element findOne(ArrayList<Element> elements) throws Exception {
-		return FindJob.super.findOne(elements);
-	}
 
 	@Override
 	public ArrayList<Element> findAll(Element element) throws IOException, Exception {

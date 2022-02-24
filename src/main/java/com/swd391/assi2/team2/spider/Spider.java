@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider;
 
+import com.swd391.assi2.team2.gui.SpiderFrame;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jsoup.nodes.Element;
 
@@ -13,6 +14,8 @@ public class Spider implements SpiderJob {
 	public List<SpiderJob> spiderJobs;
 
 	public StringBuilder spiderLog = new StringBuilder();
+
+	public SpiderFrame frame;
 
 	public Spider(List<SpiderJob> spiderJobs) {
 		this.spiderJobs = spiderJobs;

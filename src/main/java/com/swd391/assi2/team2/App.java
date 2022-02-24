@@ -1,6 +1,7 @@
 package com.swd391.assi2.team2;
 
 import com.swd391.assi2.team2.repository.JobRepository;
+import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.SpiderFactory;
 import com.swd391.assi2.team2.spider.job.JobFactory;
@@ -20,8 +21,8 @@ public class App implements ApplicationRunner {
 	JobFactory jobFactory;
 	@Autowired
 	JobRepository jobRepository;
-
-	//-----------
+	@Autowired
+	UnitOfWork work;
 
 	public static void main(String[] args) {
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(App.class);
@@ -37,6 +38,8 @@ public class App implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 
+
+		System.out.println(jobFactory);
 		Spider spider = spiderFactory.getSpider("src/main/resources/spider/job123/navigate_spider.config.xml");
 		spider.run(null);
 

@@ -45,10 +45,9 @@ public class Tag implements FindJob, FilterJob {
 
 	@Override
 	public MethodCall getMethodCall() {
-		for (MethodCall value : MethodCall.values()) {
-			if(value.getMethodName().equals(method))
+		for (MethodCall value : MethodCall.values())
+			if (value.getMethodName().equals(method))
 				return value;
-		}
 		return FindAll;
 	}
 
