@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class GetText implements OutJob {
+	public StringBuilder spiderLog;
+
 	@Override
 	public Object collect(Element element) {
 		return element.text() + "\n";

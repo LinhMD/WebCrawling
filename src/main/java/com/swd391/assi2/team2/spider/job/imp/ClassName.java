@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class ClassName implements FindJob, FilterJob {
 	public String className;
 	public String method;
+	public StringBuilder spiderLog;
 
 	public String getClassName() {
 		return className;

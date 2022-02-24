@@ -1,10 +1,12 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
+import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.begin.InJob;
 import com.swd391.assi2.team2.utils.URLQueue;
 import com.swd391.assi2.team2.utils.VisitedUrl;
+import lombok.Data;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VisitFromUrlQueue extends ComplexJob implements InJob {
+	public StringBuilder spiderLog;
 
 	public String queueName;
 
@@ -29,7 +32,12 @@ public class VisitFromUrlQueue extends ComplexJob implements InJob {
 
 		if(urlQueue != null && !urlQueue.isEmpty()){
 			while (true){
-				String url = urlQueue.pop();
+				String url = urlQueue.poll();
+				urlQueue.add(url);
+
+				if(url == null) continue;
+
+				if(VisitedUrl.getInstance().contains(url)) continue;
 
 				boolean checkStartWith = false;
 
@@ -42,23 +50,22 @@ public class VisitFromUrlQueue extends ComplexJob implements InJob {
 
 				if(!checkStartWith) continue;
 
-				if(!VisitedUrl.getInstance().contains(url)){
 
-					System.out.println("Visiting: "+url);
-					System.out.println("pool size: " + urlQueue.size());
-					Document document = Jsoup.connect(url).get();
-					Element element = new Element("div");
-					element.html(document.html());
-					VisitedUrl.getInstance().add(url);
-					return element;
-				}
+				System.out.println("Visiting: " + url);
+				System.out.println("pool size: " + urlQueue.size());
+				Document document = Jsoup.connect(url).get();
+				Element element = new Element("div");
+				element.html(document.html());
+				VisitedUrl.getInstance().add(url);
+				return element;
 			}
 		}
 		return null;
 	}
 
+
 	@Override
-	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory) {
+	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory, Spider spider) {
 		this.queueName = element.getChild("queueName").getText();
 		this.method = element.getChildText("method");
 		List<org.jdom2.Element> urlFilters = element.getChild("urlStartWiths").getChildren();

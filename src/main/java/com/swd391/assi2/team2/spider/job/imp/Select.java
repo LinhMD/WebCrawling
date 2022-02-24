@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Select implements  FindJob {
+	public StringBuilder spiderLog;
+
 	public String cssSelect;
 
 	public Select(String cssSelect) {

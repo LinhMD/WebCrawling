@@ -14,6 +14,7 @@ import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAl
 import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.Start;
 
 public class Visit implements InJob, FindJob {
+	public StringBuilder spiderLog;
 	public String url;
 	public String method;
 

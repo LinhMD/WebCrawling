@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job;
 
+import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.imp.ComplexJob;
 import org.jdom2.Element;
@@ -21,7 +22,7 @@ public class JobFactory {
 	* start at this
 	* need to create jobs
 	* */
-	public  List<SpiderJob> getJobs(List<Element> jobsData) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public  List<SpiderJob> getJobs(List<Element> jobsData, Spider spider) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		List<SpiderJob> jobList = new ArrayList<>();
 		for (Element objectData : jobsData) {
 			String name = objectData.getName();
@@ -29,9 +30,9 @@ public class JobFactory {
 
 			SpiderJob jobInstance = (SpiderJob) spiderJobClass.newInstance();
 			if(jobInstance instanceof ComplexJob){
-				((ComplexJob) jobInstance).initData(objectData, this);
+				((ComplexJob) jobInstance).initData(objectData, this, spider);
 			}else
-				initData(objectData, spiderJobClass, jobInstance);
+				initData(objectData, spiderJobClass, jobInstance, spider);
 			String jobID = objectData.getAttributeValue("id");
 			if(jobID != null && !jobID.isBlank())
 				JOBS_MAP.put(jobID, jobInstance);
@@ -40,14 +41,19 @@ public class JobFactory {
 		return jobList;
 	}
 
-	@Contract("_, _, _ -> param3")
-	private  SpiderJob initData(@NotNull Element objectData, Class<?> spiderJobClass, SpiderJob jobInstance) throws  IllegalAccessException {
+	private  SpiderJob initData(@NotNull Element objectData, Class<?> spiderJobClass, SpiderJob jobInstance, Spider spider) throws  IllegalAccessException {
 		Field[] fields = spiderJobClass.getDeclaredFields();
 		for (Field field : fields) {
+			if(field.getType().isAssignableFrom(StringBuilder.class)){
+				field.set(jobInstance, spider.spiderLog);
+				continue;
+			}
 			Element nodeField = objectData.getChild(field.getName());
 			String value = nodeField.getValue();
-			if(value != null)
+			if(value != null){
 				field.set(jobInstance, value.trim());
+			}
+
 		}
 		return jobInstance;
 	}

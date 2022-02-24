@@ -38,6 +38,10 @@ public class App implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 
 		Spider spider = spiderFactory.getSpider("src/main/resources/spider/job123/navigate_spider.config.xml");
+		spider.run(null);
+
+		spider = spiderFactory.getSpider("src/main/resources/spider/job123/spider.config.xml");
+
 		Object run = spider.run(null);
 
 	}

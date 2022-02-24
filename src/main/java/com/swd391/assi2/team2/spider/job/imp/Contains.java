@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
 import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.*;
 
 public class Contains implements FindJob, FilterJob {
-
 	public String contains;
 	public String method;
+
+	public StringBuilder spiderLog;
 
 	public Contains() {
 	}

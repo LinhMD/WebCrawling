@@ -12,6 +12,7 @@ import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.Filter
 import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAll;
 
 public class ID implements FindJob, FilterJob {
+	public StringBuilder spiderLog;
 
 	public String id;
 	public String method;

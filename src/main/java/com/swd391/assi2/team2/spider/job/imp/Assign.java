@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
+import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.end.OutJob;
@@ -13,6 +14,8 @@ import java.util.List;
 public class Assign extends ComplexJob implements OutJob {
 	public String field;
 	public List<SpiderJob> jobList = new ArrayList<>();
+
+	public StringBuilder spiderLog;
 
 	public Assign() {
 	}
@@ -59,10 +62,10 @@ public class Assign extends ComplexJob implements OutJob {
 	}
 
 	@Override
-	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory) {
+	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory, Spider spider) {
 		field = element.getChildText("field");
 		try {
-			this.jobList.addAll(jobFactory.getJobs(element.getChild("SpiderJobs").getChildren()));
+			this.jobList.addAll(jobFactory.getJobs(element.getChild("SpiderJobs").getChildren(), spider));
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}

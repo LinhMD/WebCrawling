@@ -70,7 +70,7 @@ public class SpiderFactory {
 	@NotNull
 	private Spider initData(Spider spider, Element root) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		List<Element> jobs = root.getChild("SpiderJobs").getChildren();
-		spider.setSpiderJobs(jobFactory.getJobs(jobs));
+		spider.setSpiderJobs(jobFactory.getJobs(jobs, spider));
 		return spider;
 	}
 

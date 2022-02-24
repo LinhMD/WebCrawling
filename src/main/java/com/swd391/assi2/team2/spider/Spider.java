@@ -12,6 +12,8 @@ public class Spider implements SpiderJob {
 
 	public List<SpiderJob> spiderJobs;
 
+	public StringBuilder spiderLog = new StringBuilder();
+
 	public Spider(List<SpiderJob> spiderJobs) {
 		this.spiderJobs = spiderJobs;
 	}

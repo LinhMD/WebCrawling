@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
+import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.end.OutJob;
@@ -7,14 +8,17 @@ import com.swd391.assi2.team2.utils.URLQueue;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class AddUrlToQueue extends ComplexJob implements OutJob {
 
 	public String queueName;
 	public String addIfMissingUrl;
-
 	public List<String> urlStartWiths = new ArrayList<>();
+	private URLQueue urlQueue;
+
+	public StringBuilder spiderLog;
 
 	public AddUrlToQueue() {
 	}
@@ -30,7 +34,6 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 		if(!link.startsWith(addIfMissingUrl))
 			link = addIfMissingUrl + link;
 
-		URLQueue urlQueue = URLQueue.URL_QUEUE_HASHMAP.get(queueName);
 		if(urlQueue == null){
 			urlQueue = new URLQueue();
 		}
@@ -68,7 +71,7 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 	}
 
 	@Override
-	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory) {
+	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory, Spider spider) {
 		this.queueName = element.getChild("queueName").getText();
 		this.addIfMissingUrl = element.getChild("addIfMissingUrl").getText();
 
@@ -76,6 +79,13 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 		if(urlFilters != null && !urlFilters.isEmpty()){
 			urlFilters.forEach(u -> this.urlStartWiths.add(u.getText()));
 		}
+
+		URLQueue urlQueue = URLQueue.URL_QUEUE_HASHMAP.get(queueName);
+		if(urlQueue == null) urlQueue = new URLQueue();
+
+		URLQueue.URL_QUEUE_HASHMAP.put(queueName, urlQueue);
+		this.urlQueue = urlQueue;
+		Iterator<String> iterator = urlQueue.iterator();
 		return this;
 	}
 }
