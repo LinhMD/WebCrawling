@@ -22,8 +22,11 @@ public class Spider implements SpiderJob {
 		this.spiderJobs = spiderJobs;
 	}
 
+	public Thread thread;
+
 	public Spider() {
 		this.spiderJobs = new ArrayList<>();
+		this.thread = new Thread(this);
 	}
 
 

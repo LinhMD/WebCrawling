@@ -35,6 +35,7 @@ public class CreateModel extends ComplexJob implements OutJob {
 	public Object collect(Element element) {
 		try {
 			Constructor<? extends DataModel> constructor = ModelClass.getConstructor();
+
 			DataModel dataModel = constructor.newInstance();
 			for (SpiderJob spiderJob : jobList) {
 				try {
