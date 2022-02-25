@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.Calendar;
 
 public class SpiderLog {
 	public Spider spider;
@@ -23,7 +24,8 @@ public class SpiderLog {
 
 	public void error(String log, Object currentJob){
 		String text = this.pane.getText();
-		text = text + log;
+		String newLog = String.format(LOG_FORMAT, DATE_FORMAT.format(Calendar.getInstance().getTime()), "ERROR" ,currentJob.getClass().getSimpleName(), log);
+		text = text + newLog;
 		this.pane.setText(text);
 	}
 
