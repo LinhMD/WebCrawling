@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
+import com.swd391.assi2.team2.spider.SpiderLog;
 import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
 import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
@@ -12,7 +13,7 @@ import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.Filter
 import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAll;
 
 public class ID implements FindJob, FilterJob {
-	public StringBuilder spiderLog;
+	public SpiderLog LOGGER;
 
 	public String id;
 	public String method;

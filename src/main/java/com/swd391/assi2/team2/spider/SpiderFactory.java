@@ -10,11 +10,13 @@ import org.jdom2.input.SAXBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +34,7 @@ public class SpiderFactory {
 		this.work = work;
 	}
 
-	public void getAllSpider(String filePath){
+	public List<Spider> getAllSpider(String filePath){
 		try {
 			List<Spider> spiders = Files.walk(Paths.get(filePath))
 					.filter(Files::isRegularFile)
@@ -50,8 +52,10 @@ public class SpiderFactory {
 				System.out.println(spider.id);
 				spiderMap.put(spider.id, spider);
 			}
+			return spiders;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return new ArrayList<>();
 		}
 	}
 
@@ -70,10 +74,11 @@ public class SpiderFactory {
 
 	@NotNull
 	private Spider initData(Spider spider, Element root) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		spider.frame = new SpiderFrame(work, spider);
+		spider.spiderLog = new SpiderLog(spider, new StringBuilder(), spider.frame.txtSpiderLog);
 		List<Element> jobs = root.getChild("SpiderJobs").getChildren();
 		spider.setSpiderJobs(jobFactory.getJobs(jobs, spider));
 
-		spider.frame = new SpiderFrame(work, spider);
 
 		return spider;
 	}

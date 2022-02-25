@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
+import com.swd391.assi2.team2.spider.SpiderLog;
 import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
 import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAll;
 
 public class Tag implements FindJob, FilterJob {
-	public StringBuilder spiderLog;
+	public SpiderLog LOGGER;
 	public String method;
 	public String tagName;
 	@Override

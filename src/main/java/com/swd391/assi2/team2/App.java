@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2;
 
+import com.swd391.assi2.team2.gui.MainFrame;
 import com.swd391.assi2.team2.repository.JobRepository;
 import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.Spider;
@@ -12,6 +13,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
+
+import javax.swing.*;
+import java.util.List;
 
 @SpringBootApplication
 public class App implements ApplicationRunner {
@@ -26,26 +30,26 @@ public class App implements ApplicationRunner {
 
 	public static void main(String[] args) {
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(App.class);
-		//------------ spider zone ---- //
-//		builder.headless(false);
-//		ConfigurableApplicationContext context = builder.run(args);
-
-		//---------------
-		ApplicationContext ctx = SpringApplication.run(App.class, args);
+		builder.headless(false);
+		ApplicationContext ctx = builder.run(args);
 
 	}
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 
+		List<Spider> allSpider = spiderFactory.getAllSpider("src/main/resources/spider/");
 
-		System.out.println(jobFactory);
-		Spider spider = spiderFactory.getSpider("src/main/resources/spider/job123/navigate_spider.config.xml");
-		spider.run(null);
 
-		spider = spiderFactory.getSpider("src/main/resources/spider/job123/spider.config.xml");
+		SwingUtilities.invokeLater(() -> {
+			MainFrame mainFrame = new MainFrame(spiderFactory, jobFactory, work, allSpider);
 
-		Object run = spider.run(null);
+			JFrame frame = new JFrame("Spider App");
+
+			frame.setContentPane(mainFrame.panel);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+		});
 
 	}
 

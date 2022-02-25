@@ -1,6 +1,7 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
 import com.swd391.assi2.team2.spider.Spider;
+import com.swd391.assi2.team2.spider.SpiderLog;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.end.OutJob;
@@ -16,9 +17,10 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 	public String queueName;
 	public String addIfMissingUrl;
 	public List<String> urlStartWiths = new ArrayList<>();
+
 	private URLQueue urlQueue;
 
-	public StringBuilder spiderLog;
+	public SpiderLog LOGGER;
 
 	public AddUrlToQueue() {
 	}
@@ -72,6 +74,8 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 
 	@Override
 	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory, Spider spider) {
+		this.LOGGER = spider.spiderLog;
+
 		this.queueName = element.getChild("queueName").getText();
 		this.addIfMissingUrl = element.getChild("addIfMissingUrl").getText();
 

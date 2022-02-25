@@ -1,6 +1,7 @@
 package com.swd391.assi2.team2.spider.job;
 
 import com.swd391.assi2.team2.spider.Spider;
+import com.swd391.assi2.team2.spider.SpiderLog;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.imp.ComplexJob;
 import org.jdom2.Element;
@@ -44,10 +45,11 @@ public class JobFactory {
 	private  SpiderJob initData(@NotNull Element objectData, Class<?> spiderJobClass, SpiderJob jobInstance, Spider spider) throws  IllegalAccessException {
 		Field[] fields = spiderJobClass.getDeclaredFields();
 		for (Field field : fields) {
-			if(field.getType().isAssignableFrom(StringBuilder.class)){
+			if(field.getType().isAssignableFrom(SpiderLog.class)){
 				field.set(jobInstance, spider.spiderLog);
 				continue;
 			}
+
 			Element nodeField = objectData.getChild(field.getName());
 			String value = nodeField.getValue();
 			if(value != null){

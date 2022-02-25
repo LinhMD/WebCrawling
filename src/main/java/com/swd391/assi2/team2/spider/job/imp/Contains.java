@@ -1,6 +1,7 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
 
+import com.swd391.assi2.team2.spider.SpiderLog;
 import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
 import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
@@ -16,7 +17,7 @@ public class Contains implements FindJob, FilterJob {
 	public String contains;
 	public String method;
 
-	public StringBuilder spiderLog;
+	public SpiderLog LOGGER;
 
 	public Contains() {
 	}

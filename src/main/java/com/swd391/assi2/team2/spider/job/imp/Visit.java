@@ -1,5 +1,6 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
+import com.swd391.assi2.team2.spider.SpiderLog;
 import com.swd391.assi2.team2.spider.job.core.begin.InJob;
 import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import com.swd391.assi2.team2.utils.VisitedUrl;
@@ -14,7 +15,7 @@ import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.FindAl
 import static com.swd391.assi2.team2.spider.job.core.SpiderJob.MethodCall.Start;
 
 public class Visit implements InJob, FindJob {
-	public StringBuilder spiderLog;
+	public SpiderLog LOGGER;
 	public String url;
 	public String method;
 

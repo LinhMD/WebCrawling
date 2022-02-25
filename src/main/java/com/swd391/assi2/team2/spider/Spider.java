@@ -4,6 +4,7 @@ import com.swd391.assi2.team2.gui.SpiderFrame;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jsoup.nodes.Element;
 
+import javax.swing.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Spider implements SpiderJob {
 
 	public List<SpiderJob> spiderJobs;
 
-	public StringBuilder spiderLog = new StringBuilder();
+	public SpiderLog spiderLog;
 
 	public SpiderFrame frame;
 
@@ -25,9 +26,6 @@ public class Spider implements SpiderJob {
 		this.spiderJobs = new ArrayList<>();
 	}
 
-	public List<SpiderJob> getSpiderJobs() {
-		return spiderJobs;
-	}
 
 	public void setSpiderJobs(List<SpiderJob> spiderJobs) {
 		this.spiderJobs = spiderJobs;
@@ -35,9 +33,7 @@ public class Spider implements SpiderJob {
 
 	@Override
 	public String toString() {
-		return "Spider{" +
-				"spiderJobs=" + spiderJobs +
-				'}';
+		return id;
 	}
 
 

@@ -1,6 +1,7 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
 import com.swd391.assi2.team2.spider.Spider;
+import com.swd391.assi2.team2.spider.SpiderLog;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jdom2.Element;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class Repeat extends ComplexJob implements SpiderJob {
 
-	public StringBuilder spiderLog;
+	public SpiderLog LOGGER;
 
 	public int interval;
 
@@ -48,6 +49,7 @@ public class Repeat extends ComplexJob implements SpiderJob {
 
 	@Override
 	public SpiderJob initData(Element element, JobFactory jobFactory, Spider spider) {
+		LOGGER = spider.spiderLog;
 		try {
 			method = element.getChildText("method");
 			interval = Integer.parseInt(element.getChildText("interval"));

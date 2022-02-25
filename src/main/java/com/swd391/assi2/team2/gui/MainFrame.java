@@ -1,15 +1,48 @@
 package com.swd391.assi2.team2.gui;
 
 import com.swd391.assi2.team2.repository.UnitOfWork;
+import com.swd391.assi2.team2.spider.Spider;
+import com.swd391.assi2.team2.spider.SpiderFactory;
+import com.swd391.assi2.team2.spider.job.JobFactory;
 
 import javax.swing.*;
+import java.util.List;
+
 
 public class MainFrame {
 
-	private JPanel panel1;
+	public JPanel panel;
 	public JList spiderList;
-	public JPanel spiderListPane;
-	public JPanel SpiderPane;
+	private JTabbedPane tabbedPane;
+
+	SpiderFactory spiderFactory;
+	JobFactory jobFactory;
+	UnitOfWork work;
+
+
+	public MainFrame(SpiderFactory spiderFactory, JobFactory jobFactory, UnitOfWork work, List<Spider> spiders) {
+		this.spiderFactory = spiderFactory;
+		this.jobFactory = jobFactory;
+		this.work = work;
+		DefaultListModel model = new DefaultListModel<>();
+		model.addAll(spiders);
+		this.spiderList.setModel(model);
+		this.spiderList.setCellRenderer(new DefaultListCellRenderer());
+		this.spiderList.setVisible(true);
+		for (Spider spider : spiders) {
+			this.tabbedPane.addTab(spider.id, spider.frame.SpiderPanel);
+		}
+
+		this.spiderList.addListSelectionListener(e -> {
+			if (e.getValueIsAdjusting()) {
+				JList source = (JList)e.getSource();
+				if(source.getSelectedValue() instanceof Spider){
+					Spider spider = (Spider) source.getSelectedValue();
+					this.tabbedPane.setSelectedIndex((this.tabbedPane.indexOfTab(spider.id)));
+				}
+			}
+		});
+	}
 
 
 }

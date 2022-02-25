@@ -12,12 +12,13 @@ public class SpiderFrame {
 	private JButton btnStop;
 	private JButton btnStart;
 	private JTree JobList;
-	private JTextPane txtSpiderLog;
-	public JList resultList;
+	public JTextPane txtSpiderLog;
+	public JList resultPane;
 	private JButton btnExport;
 	private JButton btnImport;
 	private JProgressBar progressBar;
 	private JButton btnSave;
+	public JPanel SpiderPanel;
 
 	public Spider spider;
 
@@ -26,6 +27,8 @@ public class SpiderFrame {
 
 	public SpiderFrame(UnitOfWork work, Spider spider) {
 		this.work = work;
-		this.spider = spider;
+
 	}
+
+
 }

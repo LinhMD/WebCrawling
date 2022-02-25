@@ -1,6 +1,7 @@
 package com.swd391.assi2.team2.spider.job.imp;
 
 import com.swd391.assi2.team2.spider.Spider;
+import com.swd391.assi2.team2.spider.SpiderLog;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.begin.InJob;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VisitFromUrlQueue extends ComplexJob implements InJob {
-	public StringBuilder spiderLog;
+	public SpiderLog LOGGER;
 
 	public String queueName;
 
@@ -66,6 +67,9 @@ public class VisitFromUrlQueue extends ComplexJob implements InJob {
 
 	@Override
 	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory, Spider spider) {
+
+		LOGGER = spider.spiderLog;
+
 		this.queueName = element.getChild("queueName").getText();
 		this.method = element.getChildText("method");
 		List<org.jdom2.Element> urlFilters = element.getChild("urlStartWiths").getChildren();
