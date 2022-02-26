@@ -25,12 +25,13 @@ public class Repeat extends ComplexJob implements SpiderJob {
 	public Object run(Object objectIn) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 		Object result = null;
 		for (int i = 0; i < interval; i++) {
+			this.LOGGER.info("interval: " + i, this);
 			result = objectIn;
 			for (SpiderJob spiderJob : jobList) {
 				try {
 					result = spiderJob.run(result);
 				} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-					e.printStackTrace();
+					this.LOGGER.error(e.getMessage(), this);
 				}
 			}
 		}
@@ -54,8 +55,8 @@ public class Repeat extends ComplexJob implements SpiderJob {
 			method = element.getChildText("method");
 			interval = Integer.parseInt(element.getChildText("interval"));
 			this.jobList.addAll(jobFactory.getJobs(element.getChild("SpiderJobs").getChildren(), spider));
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), this);
 		}
 		return this;
 	}

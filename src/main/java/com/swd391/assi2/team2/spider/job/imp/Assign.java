@@ -33,7 +33,7 @@ public class Assign extends ComplexJob implements OutJob {
 			try {
 				result = spiderJob.run(result);
 			} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-				e.printStackTrace();
+				LOGGER.error(e.getMessage(), this);
 			}
 		}
 		return result;
@@ -46,7 +46,7 @@ public class Assign extends ComplexJob implements OutJob {
 			try {
 				result = spiderJob.run(result);
 			} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-				e.printStackTrace();
+				LOGGER.error(e.getMessage(), this);
 			}
 		}
 		return result;
@@ -68,8 +68,8 @@ public class Assign extends ComplexJob implements OutJob {
 		field = element.getChildText("field");
 		try {
 			this.jobList.addAll(jobFactory.getJobs(element.getChild("SpiderJobs").getChildren(), spider));
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			LOGGER.error("Init Error: " + e.getMessage(), this);
 		}
 		return this;
 	}

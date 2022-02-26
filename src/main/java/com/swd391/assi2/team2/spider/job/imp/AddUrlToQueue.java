@@ -31,6 +31,7 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 
 	@Override
 	public Object collect(Element element) {
+		LOGGER.info("Start collect URL", this);
 		String link = element.attr("href");
 
 		if(!link.startsWith(addIfMissingUrl))
@@ -41,7 +42,9 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 		}
 		for (String urlStartWith : urlStartWiths) {
 			if(link.startsWith(urlStartWith)){
-				urlQueue.add(link); break;
+				urlQueue.add(link);
+				LOGGER.info("collected URL: " + link, this);
+				break;
 			}
 		}
 
@@ -53,6 +56,7 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 	public Object collect(ArrayList<Element> elements) {
 		if (elements.isEmpty()) return null;
 
+		LOGGER.info("Start collect URL", this);
 		URLQueue urlQueue = URLQueue.URL_QUEUE_HASHMAP.get(queueName);
 		if(urlQueue == null) urlQueue = new URLQueue();
 
@@ -63,7 +67,8 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 
 			for (String urlStartWith : urlStartWiths) {
 				if(link.startsWith(urlStartWith)){
-					urlQueue.addUnique(link); break;
+					urlQueue.addUnique(link);
+					break;
 				}
 			}
 		}

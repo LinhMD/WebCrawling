@@ -27,7 +27,7 @@ public class GetText implements OutJob {
 
 	@Override
 	public ArrayList<Object> collects(ArrayList<Element> elements) {
-		return elements.stream().map(Element::text).collect(Collectors.toCollection(ArrayList::new));
+		return elements.stream().map(Element::text).map(s -> s + "\n").collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	@Override

@@ -51,14 +51,17 @@ public class VisitFromUrlQueue extends ComplexJob implements InJob {
 
 				if(!checkStartWith) continue;
 
-
-				System.out.println("Visiting: " + url);
-				System.out.println("pool size: " + urlQueue.size());
-				Document document = Jsoup.connect(url).get();
-				Element element = new Element("div");
-				element.html(document.html());
-				VisitedUrl.getInstance().add(url);
-				return element;
+				try{
+					Document document = Jsoup.connect(url).get();
+					Element element = new Element("div");
+					element.html(document.html());
+					VisitedUrl.getInstance().add(url);
+					this.LOGGER.info("Visiting: " + url, this);
+					this.LOGGER.info("pool size: " + urlQueue.size(), this);
+					return element;
+				}catch (Exception e){
+					this.LOGGER.error(e.getMessage(), this);
+				}
 			}
 		}
 		return null;
@@ -74,7 +77,7 @@ public class VisitFromUrlQueue extends ComplexJob implements InJob {
 		this.method = element.getChildText("method");
 		List<org.jdom2.Element> urlFilters = element.getChild("urlStartWiths").getChildren();
 		if(urlFilters != null && !urlFilters.isEmpty()){
-			urlFilters.forEach(u -> this.urlStartWiths.add(u.getText()));
+			urlFilters.stream().map(org.jdom2.Element::getText).forEach(urlStartWiths::add);
 		}
 		return this;
 	}

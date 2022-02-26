@@ -37,7 +37,7 @@ public class Select implements  FindJob {
 			try {
 				result.addAll(element.select(cssSelect));
 			}catch (Exception e){
-				e.printStackTrace();
+				LOGGER.error(e.getMessage(), this);
 			}
 		}
 		return result;

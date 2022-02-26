@@ -76,6 +76,8 @@ public class SpiderFactory {
 	private Spider initData(Spider spider, Element root) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		spider.frame = new SpiderFrame(work, spider);
 		spider.spiderLog = new SpiderLog(spider, new StringBuilder(), spider.frame.txtSpiderLog);
+		Thread thread = new Thread(spider.spiderLog);
+		thread.start();
 		List<Element> jobs = root.getChild("SpiderJobs").getChildren();
 		spider.setSpiderJobs(jobFactory.getJobs(jobs, spider));
 

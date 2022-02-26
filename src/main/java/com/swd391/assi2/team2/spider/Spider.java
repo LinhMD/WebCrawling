@@ -60,6 +60,8 @@ public class Spider implements SpiderJob {
 				e.printStackTrace();
 			}
 		}
+		this.thread = new Thread(this);
+		this.frame.btnStartClick(null);
 		return result;
 	}
 

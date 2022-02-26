@@ -51,12 +51,15 @@ public class ClassName implements FindJob, FilterJob {
 		for (Element e : elements) {
 			result.addAll(e.getElementsByClass(this.className));
 		}
+		this.LOGGER.info("Total found: " + result.size(), this);
 		return result;
 	}
 
 	@Override
 	public ArrayList<Element> findAll(Element element) throws IOException, Exception {
-		return new ArrayList<>(element.getElementsByClass(className));
+		ArrayList<Element> result = new ArrayList<>(element.getElementsByClass(className));
+		this.LOGGER.info("Total found: " + result.size(), this);
+		return result;
 	}
 
 
@@ -68,6 +71,7 @@ public class ClassName implements FindJob, FilterJob {
 
 	@Override
 	public ArrayList<Element> filter(ArrayList<Element> elements) {
+		this.LOGGER.info("Run filter class name: " + this.className , this);
 		return elements.stream()
 				.filter(e -> e.className().equals(this.className))
 				.collect(Collectors.toCollection(ArrayList::new));
@@ -75,6 +79,7 @@ public class ClassName implements FindJob, FilterJob {
 
 	@Override
 	public ArrayList<Element> filter(Element element) {
+		this.LOGGER.info("Run filter class name: " + this.className , this);
 		return new ArrayList<>(element.getElementsByClass(className));
 	}
 

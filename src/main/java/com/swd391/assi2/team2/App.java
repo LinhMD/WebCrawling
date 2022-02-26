@@ -47,6 +47,7 @@ public class App implements ApplicationRunner {
 			JFrame frame = new JFrame("Spider App");
 
 			frame.setContentPane(mainFrame.panel);
+			frame.setSize(1000, 700);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setVisible(true);
 		});

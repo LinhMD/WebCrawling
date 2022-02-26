@@ -49,13 +49,13 @@ public class CreateModel extends ComplexJob implements OutJob {
 					}
 
 				} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | NoSuchFieldException e) {
-					e.printStackTrace();
+					LOGGER.error(e.getMessage(), this);
 				}
 			}
-			System.out.println(dataModel);
+			LOGGER.info(dataModel.toString(), this);
 			return dataModel;
 		} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage(), this);
 		}
 		return null;
 	}
@@ -75,9 +75,8 @@ public class CreateModel extends ComplexJob implements OutJob {
 			method = element.getChildText("method");
 			ModelClass = (Class<? extends DataModel>) Class.forName("com.swd391.assi2.team2.data." + element.getChildText("ModelClass"));
 			this.jobList.addAll(jobFactory.getJobs(element.getChild("SpiderJobs").getChildren(), spider));
-
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			this.LOGGER.error("Error when init data: " + e.getMessage() , this);
 		}
 		return this;
 	}
