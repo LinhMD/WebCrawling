@@ -8,6 +8,9 @@ import com.swd391.assi2.team2.spider.job.core.end.OutJob;
 import com.swd391.assi2.team2.utils.URLQueue;
 import org.jsoup.nodes.Element;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -97,4 +100,6 @@ public class AddUrlToQueue extends ComplexJob implements OutJob {
 		Iterator<String> iterator = urlQueue.iterator();
 		return this;
 	}
+
+
 }

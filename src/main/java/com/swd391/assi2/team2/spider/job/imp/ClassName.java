@@ -2,11 +2,14 @@ package com.swd391.assi2.team2.spider.job.imp;
 
 
 import com.swd391.assi2.team2.spider.SpiderLog;
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.center.FilterJob;
 import com.swd391.assi2.team2.spider.job.core.center.FindJob;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -44,6 +47,8 @@ public class ClassName implements FindJob, FilterJob {
 	public MethodCall[] getImplementMethods() {
 		return new MethodCall[]{MethodCall.Filter, MethodCall.FindAll, MethodCall.FindOne};
 	}
+
+
 
 	@Override
 	public ArrayList<Element> findAll(ArrayList<Element> elements) {

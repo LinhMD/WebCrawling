@@ -26,7 +26,6 @@ public class Spider implements SpiderJob {
 
 	public Spider() {
 		this.spiderJobs = new ArrayList<>();
-		this.thread = new Thread(this);
 	}
 
 
@@ -60,8 +59,8 @@ public class Spider implements SpiderJob {
 				e.printStackTrace();
 			}
 		}
-		this.thread = new Thread(this);
-		this.frame.btnStartClick(null);
+		this.frame.btnStart.setEnabled(true);
+		this.frame.btnStop.setEnabled(false);
 		return result;
 	}
 

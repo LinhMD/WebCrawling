@@ -8,6 +8,8 @@ import com.swd391.assi2.team2.spider.job.core.end.OutJob;
 import org.jsoup.nodes.Element;
 
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +63,8 @@ public class Assign extends ComplexJob implements OutJob {
 	public MethodCall[] getImplementMethods() {
 		return new MethodCall[]{MethodCall.Collect};
 	}
+
+
 
 	@Override
 	public SpiderJob initData(org.jdom2.Element element, JobFactory jobFactory, Spider spider) {

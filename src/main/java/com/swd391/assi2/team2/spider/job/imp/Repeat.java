@@ -6,6 +6,8 @@ import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.jdom2.Element;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class Repeat extends ComplexJob implements SpiderJob {
 
 	public int interval;
 
-	List<SpiderJob> jobList = new ArrayList<>();
+	public List<SpiderJob> jobList = new ArrayList<>();
 
 	public Repeat() {
 	}
@@ -37,6 +39,8 @@ public class Repeat extends ComplexJob implements SpiderJob {
 		}
 		return result;
 	}
+
+
 
 	@Override
 	public MethodCall getMethodCall() {

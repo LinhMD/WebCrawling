@@ -6,6 +6,7 @@ import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.SpiderFactory;
 import com.swd391.assi2.team2.spider.job.JobFactory;
+import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -40,18 +41,21 @@ public class App implements ApplicationRunner {
 
 		List<Spider> allSpider = spiderFactory.getAllSpider("src/main/resources/spider/");
 
+//		for (Spider spider : allSpider) {
+//			System.out.println(spider.toTreeNode().getChildCount());
+//		}
 
-		SwingUtilities.invokeLater(() -> {
-			MainFrame mainFrame = new MainFrame(spiderFactory, jobFactory, work, allSpider);
+//		SwingUtilities.invokeLater(() -> {
+//
+//		});
+		MainFrame mainFrame = new MainFrame(spiderFactory, jobFactory, work, allSpider);
 
-			JFrame frame = new JFrame("Spider App");
+		JFrame frame = new JFrame("Spider App");
 
-			frame.setContentPane(mainFrame.panel);
-			frame.setSize(1000, 700);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);
-		});
-
+		frame.setContentPane(mainFrame.panel);
+		frame.setSize(1000, 700);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 
 }

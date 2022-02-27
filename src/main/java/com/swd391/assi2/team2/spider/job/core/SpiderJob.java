@@ -1,8 +1,17 @@
 package com.swd391.assi2.team2.spider.job.core;
 
+import com.swd391.assi2.team2.spider.Spider;
+import com.swd391.assi2.team2.spider.SpiderLog;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public interface SpiderJob extends Runnable{
 
@@ -67,4 +76,46 @@ public interface SpiderJob extends Runnable{
 			e.printStackTrace();
 		}
 	}
+
+	default MutableTreeNode toTreeNode(){
+		System.out.println("here");
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.getClass().getSimpleName());
+		Field[] fields = this.getClass().getFields();
+		for (Field field : fields) {
+			try {
+				Object value = field.get(this);
+
+				if(value == null) continue;
+				if(value instanceof SpiderLog) continue;
+				if(value instanceof Thread) continue;
+
+				if(value instanceof List){
+					MutableTreeNode child = getNodeFromList(field, (List<?>) value);
+					root.add(child);
+					continue;
+				}
+
+				DefaultMutableTreeNode node = new DefaultMutableTreeNode(field.getName() + ": " + value);
+				root.add(node);
+
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return root;
+	}
+
+	private MutableTreeNode getNodeFromList(Field field, List<?> value) {
+		DefaultMutableTreeNode child = new DefaultMutableTreeNode(field.getName());
+		for(Object o : value){
+			if(o instanceof SpiderJob){
+				child.add(((SpiderJob) o).toTreeNode());
+				continue;
+			}
+			child.add(new DefaultMutableTreeNode(o));
+		}
+
+		return child;
+	}
+
 }

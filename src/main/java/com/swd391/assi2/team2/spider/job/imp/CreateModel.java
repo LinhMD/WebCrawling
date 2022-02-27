@@ -7,6 +7,8 @@ import com.swd391.assi2.team2.spider.job.core.SpiderJob;
 import com.swd391.assi2.team2.spider.job.core.end.OutJob;
 import org.jsoup.nodes.Element;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -19,7 +21,7 @@ public class CreateModel extends ComplexJob implements OutJob {
 
 	public Class<? extends DataModel> ModelClass;
 
-	List<SpiderJob> jobList = new ArrayList<>();
+	public List<SpiderJob> jobList = new ArrayList<>();
 	public SpiderLog LOGGER;
 
 	public CreateModel() {
@@ -80,4 +82,5 @@ public class CreateModel extends ComplexJob implements OutJob {
 		}
 		return this;
 	}
+
 }

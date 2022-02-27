@@ -49,7 +49,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="c187e" class="javax.swing.JTree" binding="JobList">
+                  <component id="c187e" class="javax.swing.JTree" binding="jobList">
                     <constraints/>
                     <properties/>
                   </component>
