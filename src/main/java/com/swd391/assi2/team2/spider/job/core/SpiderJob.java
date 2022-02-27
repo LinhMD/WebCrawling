@@ -78,7 +78,6 @@ public interface SpiderJob extends Runnable{
 	}
 
 	default MutableTreeNode toTreeNode(){
-		System.out.println("here");
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.getClass().getSimpleName());
 		Field[] fields = this.getClass().getFields();
 		for (Field field : fields) {

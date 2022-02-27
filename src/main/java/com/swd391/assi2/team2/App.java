@@ -45,17 +45,19 @@ public class App implements ApplicationRunner {
 //			System.out.println(spider.toTreeNode().getChildCount());
 //		}
 
-//		SwingUtilities.invokeLater(() -> {
-//
-//		});
-		MainFrame mainFrame = new MainFrame(spiderFactory, jobFactory, work, allSpider);
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-		JFrame frame = new JFrame("Spider App");
+		SwingUtilities.invokeLater(() -> {
+			MainFrame mainFrame = new MainFrame(spiderFactory, jobFactory, work, allSpider);
 
-		frame.setContentPane(mainFrame.panel);
-		frame.setSize(1000, 700);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+			JFrame frame = new JFrame("Spider App");
+
+			frame.setContentPane(mainFrame.panel);
+			frame.setSize(1000, 700);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+		});
+
 	}
 
 }

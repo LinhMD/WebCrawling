@@ -23,7 +23,10 @@ public class SpiderFrame {
 	private JButton btnImport;
 	private JList resultPane;
 
+
 	public Spider spider;
+
+	private boolean isInitTree = false;
 
 	public SpiderFrame() {
 	}
@@ -36,6 +39,25 @@ public class SpiderFrame {
 		this.btnImport.addActionListener(this::btnImportClick);
 
 	}
+
+	public void initJobTree(){
+		if(isInitTree) return;
+
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode(spider);
+		DefaultMutableTreeNode jobsList = new DefaultMutableTreeNode("Jobs List");
+
+		for (SpiderJob spiderJob : spider.spiderJobs) {
+			MutableTreeNode child = spiderJob.toTreeNode();
+			if(child == null) continue;
+			jobsList.add(child);
+		}
+
+		root.add(jobsList);
+
+		this.jobList.setModel(new DefaultTreeModel(root));
+		this.isInitTree = false;
+	}
+
 
 	public void btnStartClick(ActionEvent event){
 		this.spider.thread = new Thread(this.spider);
@@ -52,19 +74,7 @@ public class SpiderFrame {
 	}
 
 	public void btnImportClick(ActionEvent event){
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode(spider);
-		DefaultMutableTreeNode jobsList = new DefaultMutableTreeNode("Jobs List");
 
-		for (SpiderJob spiderJob : spider.spiderJobs) {
-			MutableTreeNode child = spiderJob.toTreeNode();
-			if(child == null) continue;
-			jobsList.add(child);
-		}
-		System.out.println(jobsList.getChildCount());
-
-		root.add(jobsList);
-
-		this.jobList.setModel(new DefaultTreeModel(root));
 	}
 
 
