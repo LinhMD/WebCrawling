@@ -1,12 +1,15 @@
 package com.swd391.assi2.team2.gui;
 
+import com.swd391.assi2.team2.models.Job;
 import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class SpiderFrame {
 
@@ -17,11 +20,11 @@ public class SpiderFrame {
 	public JTree jobList;
 	public JTextPane txtSpiderLog;
 	public JPanel SpiderPanel;
-	private JButton btnSave;
-	private JProgressBar progressBar;
-	private JButton btnExport;
-	private JButton btnImport;
-	private JList resultPane;
+	public JButton btnSave;
+	public JProgressBar progressBar;
+	public JButton btnExport;
+	public JButton btnImport;
+	public JList resultPane;
 
 
 	public Spider spider;

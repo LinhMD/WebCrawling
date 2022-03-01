@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JobRepository extends JpaRepository<Job, Double> {
 
-    default Job makeTransaction(@NotNull Recruitment recruitment) {
+    default Job TransferSpiderToJob(@NotNull Recruitment recruitment) {
         Job job = new Job();
         Details details = recruitment.details;
         job.setCompany(recruitment.company);

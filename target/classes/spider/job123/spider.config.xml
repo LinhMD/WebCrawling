@@ -120,6 +120,9 @@
                         </Assign>
                     </SpiderJobs>
                 </CreateModel>
+                <TransferToResult>
+
+                </TransferToResult>
             </SpiderJobs>
         </Repeat>
     </SpiderJobs>

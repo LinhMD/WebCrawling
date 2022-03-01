@@ -87,7 +87,6 @@ public interface SpiderJob extends Runnable{
 				if(value == null) continue;
 				if(value instanceof SpiderLog) continue;
 				if(value instanceof Thread) continue;
-
 				if(value instanceof List){
 					MutableTreeNode child = getNodeFromList(field, (List<?>) value);
 					root.add(child);

@@ -45,7 +45,7 @@ public class App implements ApplicationRunner {
 //			System.out.println(spider.toTreeNode().getChildCount());
 //		}
 
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	//	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
 		SwingUtilities.invokeLater(() -> {
 			MainFrame mainFrame = new MainFrame(spiderFactory, jobFactory, work, allSpider);
