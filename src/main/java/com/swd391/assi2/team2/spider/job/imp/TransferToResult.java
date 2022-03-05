@@ -12,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransferToResult extends ComplexJob{
-List<Object> objectList = new ArrayList<>();
-JList  ls = new JList<Object>();
-private boolean isUpdate = false;
+    List<Object> objectList = new ArrayList<>();
+    JList  ls = new JList<Object>();
+    private boolean isUpdate = false;
+
     @Override
     public void run() {
         while(true){

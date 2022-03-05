@@ -1,10 +1,7 @@
 package com.swd391.assi2.team2.gui;
 
-import com.swd391.assi2.team2.models.Job;
-import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -12,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class SpiderFrame {
-
-	public UnitOfWork work;
 
 	public JButton btnStop;
 	public JButton btnStart;
@@ -34,8 +29,7 @@ public class SpiderFrame {
 	public SpiderFrame() {
 	}
 
-	public SpiderFrame(UnitOfWork work, Spider spider) {
-		this.work = work;
+	public SpiderFrame( Spider spider) {
 		this.spider = spider;
 		this.btnStart.addActionListener(this::btnStartClick);
 		this.btnStop.addActionListener(this::btnStopClick);

@@ -1,33 +1,35 @@
 package com.swd391.assi2.team2;
 
 import com.swd391.assi2.team2.gui.MainFrame;
-import com.swd391.assi2.team2.repository.JobRepository;
-import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.SpiderFactory;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import com.swd391.assi2.team2.spider.job.core.SpiderJob;
+import com.swd391.assi2.team2.spider.job.imp.Assign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.util.List;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+		DataSourceAutoConfiguration.class,
+		DataSourceTransactionManagerAutoConfiguration.class,
+		HibernateJpaAutoConfiguration.class})
 public class App implements ApplicationRunner {
 	@Autowired
 	SpiderFactory spiderFactory;
 	@Autowired
 	JobFactory jobFactory;
-	@Autowired
-	JobRepository jobRepository;
-	@Autowired
-	UnitOfWork work;
+
 
 	public static void main(String[] args) {
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(App.class);
@@ -38,17 +40,16 @@ public class App implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-
 		List<Spider> allSpider = spiderFactory.getAllSpider("src/main/resources/spider/");
 
 //		for (Spider spider : allSpider) {
 //			System.out.println(spider.toTreeNode().getChildCount());
 //		}
 
-	//	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
 		SwingUtilities.invokeLater(() -> {
-			MainFrame mainFrame = new MainFrame(spiderFactory, jobFactory, work, allSpider);
+			MainFrame mainFrame = new MainFrame(spiderFactory, jobFactory, allSpider);
 
 			JFrame frame = new JFrame("Spider App");
 

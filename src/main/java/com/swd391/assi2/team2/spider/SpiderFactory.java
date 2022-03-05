@@ -1,7 +1,6 @@
 package com.swd391.assi2.team2.spider;
 
 import com.swd391.assi2.team2.gui.SpiderFrame;
-import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.job.JobFactory;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -27,11 +26,9 @@ public class SpiderFactory {
 
 	public HashMap<String, Spider> spiderMap = new HashMap<>();
 	public final JobFactory jobFactory;
-	public final UnitOfWork work;
 
-	public SpiderFactory(JobFactory jobFactory, UnitOfWork work) {
+	public SpiderFactory(JobFactory jobFactory) {
 		this.jobFactory = jobFactory;
-		this.work = work;
 	}
 
 	public List<Spider> getAllSpider(String filePath){
@@ -74,7 +71,7 @@ public class SpiderFactory {
 
 	@NotNull
 	private Spider initData(Spider spider, Element root) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		spider.frame = new SpiderFrame(work, spider);
+		spider.frame = new SpiderFrame(spider);
 		spider.spiderLog = new SpiderLog(spider, new StringBuilder(), spider.frame.txtSpiderLog);
 		Thread thread = new Thread(spider.spiderLog);
 		thread.start();

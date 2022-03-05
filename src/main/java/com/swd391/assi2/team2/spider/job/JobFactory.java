@@ -49,7 +49,7 @@ public class JobFactory {
 		return jobList;
 	}
 
-	private  SpiderJob initData(@NotNull Element objectData, Class<?> spiderJobClass, SpiderJob jobInstance, Spider spider) throws  IllegalAccessException {
+	public   SpiderJob initData(@NotNull Element objectData, Class<?> spiderJobClass, SpiderJob jobInstance, Spider spider) throws  IllegalAccessException {
 		Field[] fields = spiderJobClass.getDeclaredFields();
 		for (Field field : fields) {
 			if(field.getType().isAssignableFrom(SpiderLog.class)){

@@ -1,6 +1,5 @@
 package com.swd391.assi2.team2.gui;
 
-import com.swd391.assi2.team2.repository.UnitOfWork;
 import com.swd391.assi2.team2.spider.Spider;
 import com.swd391.assi2.team2.spider.SpiderFactory;
 import com.swd391.assi2.team2.spider.job.JobFactory;
@@ -18,13 +17,11 @@ public class MainFrame {
 
 	SpiderFactory spiderFactory;
 	JobFactory jobFactory;
-	UnitOfWork work;
 
 
-	public MainFrame(SpiderFactory spiderFactory, JobFactory jobFactory, UnitOfWork work, List<Spider> spiders) {
+	public MainFrame(SpiderFactory spiderFactory, JobFactory jobFactory  , List<Spider> spiders) {
 		this.spiderFactory = spiderFactory;
 		this.jobFactory = jobFactory;
-		this.work = work;
 		DefaultListModel model = new DefaultListModel<>();
 		model.addAll(spiders);
 		this.spiderList.setModel(model);

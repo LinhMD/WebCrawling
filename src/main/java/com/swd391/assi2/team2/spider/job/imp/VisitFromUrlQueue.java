@@ -51,7 +51,7 @@ public class VisitFromUrlQueue extends ComplexJob implements InJob {
 
 				if(!checkStartWith) continue;
 
-				try{
+				try {
 					Document document = Jsoup.connect(url).get();
 					Element element = new Element("div");
 					element.html(document.html());
@@ -59,8 +59,8 @@ public class VisitFromUrlQueue extends ComplexJob implements InJob {
 					this.LOGGER.info("Visiting: " + url, this);
 					this.LOGGER.info("pool size: " + urlQueue.size(), this);
 					return element;
-				}catch (Exception e){
-					this.LOGGER.error(e.getMessage(), this);
+				} catch (IOException e) {
+					this.LOGGER.error(e.getMessage() + " should check your wifi connection", this);
 				}
 			}
 		}

@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -92,6 +93,11 @@ public interface SpiderJob extends Runnable{
 					root.add(child);
 					continue;
 				}
+				if(value instanceof HashMap){
+					MutableTreeNode child = getNodeFromHashMap(field, (HashMap<?, ?>) value);
+					root.add(child);
+					continue;
+				}
 
 				DefaultMutableTreeNode node = new DefaultMutableTreeNode(field.getName() + ": " + value);
 				root.add(node);
@@ -101,6 +107,22 @@ public interface SpiderJob extends Runnable{
 			}
 		}
 		return root;
+	}
+
+	private MutableTreeNode getNodeFromHashMap(Field field, HashMap<?, ?> value) {
+		DefaultMutableTreeNode child = new DefaultMutableTreeNode(field.getName());
+		for (Object key : value.keySet()) {
+			Object o = value.get(key);
+			if(o == null) continue;
+			MutableTreeNode node;
+			if(o instanceof SpiderJob){
+				node = ((SpiderJob) o).toTreeNode();
+			}else {
+				node = new DefaultMutableTreeNode(o);
+			}
+			child.add(node);
+		}
+		return child;
 	}
 
 	private MutableTreeNode getNodeFromList(Field field, List<?> value) {

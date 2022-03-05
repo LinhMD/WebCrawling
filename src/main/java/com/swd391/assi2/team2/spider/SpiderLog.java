@@ -1,6 +1,7 @@
 package com.swd391.assi2.team2.spider;
 
 import javax.swing.*;
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -48,6 +49,7 @@ public class SpiderLog implements Runnable {
 		String newLog = String.format(LOG_FORMAT, DATE_FORMAT.format(Calendar.getInstance().getTime()), logLevel, currentJob.getClass().getSimpleName(), log) + "\n";
 		this.logs.append(newLog);
 		isUpdate = true;
+
 	}
 
 	@Override
